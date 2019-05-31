@@ -15,7 +15,7 @@ MprFormRepository formrepo;
 public String Recurit(@ModelAttribute MprForm mprForm) {
 	
 	
-	return "";
+	return "create mpr";
 }
 
 }
