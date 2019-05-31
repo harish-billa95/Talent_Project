@@ -1,0 +1,454 @@
+
+<!doctype html>
+<html>
+<title>Talent Acquisition Portal</title>
+
+ation
+</title>
+<head>
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<style>
+
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+.radio-inline input[type=radio] {
+	position: absolute;
+	margin-top: 4px\9;
+	margin-left: -30px
+}
+</style>
+<script>
+	function openCity(evt, cityName) {
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className
+					.replace(" active", "");
+		}
+		document.getElementById(cityName).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+
+	$(function() {
+		var $result = $('#eventsResult');
+
+		$('#eventsTable').on('all.bs.table', function(e, name, args) {
+			console.log('Event:', name, ', data:', args);
+		}).on('click-row.bs.table', function(e, row, $element) {
+			$result.text('Event: click-row.bs.table');
+		}).on('dbl-click-row.bs.table', function(e, row, $element) {
+			$result.text('Event: dbl-click-row.bs.table');
+		}).on('sort.bs.table', function(e, name, order) {
+			$result.text('Event: sort.bs.table');
+		}).on('check.bs.table', function(e, row) {
+			$result.text('Event: check.bs.table');
+		}).on('uncheck.bs.table', function(e, row) {
+			$result.text('Event: uncheck.bs.table');
+		}).on('check-all.bs.table', function(e) {
+			$result.text('Event: check-all.bs.table');
+		}).on('uncheck-all.bs.table', function(e) {
+			$result.text('Event: uncheck-all.bs.table');
+		}).on('load-success.bs.table', function(e, data) {
+			$result.text('Event: load-success.bs.table');
+		}).on('load-error.bs.table', function(e, status) {
+			$result.text('Event: load-error.bs.table');
+		}).on('column-switch.bs.table', function(e, field, checked) {
+			$result.text('Event: column-switch.bs.table');
+		}).on('page-change.bs.table', function(e, number, size) {
+			$result.text('Event: page-change.bs.table');
+		}).on('search.bs.table', function(e, text) {
+			$result.text('Event: search.bs.table');
+		});
+
+		document.getElementById("defaultOpen").click();
+	});
+
+	$(function() {
+		var $table = $('#eventsTable');
+		$('#export').click(function() {
+			$table.tableExport({
+				type : 'excel',
+				escape : false
+			});
+		});
+		$(".btn-expand-collapse").click(function(e) {
+			$(".navbar-primary").toggleClass("collapsed");
+		});
+
+	});
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "250px";
+		document.getElementById("main").style.marginLeft = "250px";
+		document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+	}
+
+	function closeNav() {
+		document.getElementById("mySidenav").style.width = "0";
+		document.getElementById("main").style.marginLeft = "0";
+		document.body.style.backgroundColor = "white";
+	}
+	function OnDropDownType(dropDown) {
+		var selectedValue = dropDown.options[dropDown.selectedIndex].value;
+
+		document.getElementById("roles").value = selectedValue;
+
+	}
+
+	function loadEmail() {
+		var xmlhttp;
+		var k = document.getElementById("email").value;
+		var urls = "email?ver=" + k;
+
+		if (window.XMLHttpRequest) {
+			xmlhttp = new XMLHttpRequest();
+		} else {
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+
+				document.getElementById("err").innerHTML = xmlhttp.responseText;
+
+			}
+		}
+		xmlhttp.open("GET", urls, true);
+		xmlhttp.send();
+	}
+
+	function loadMobile() {
+		var xmlhttp;
+		var k = document.getElementById("mobile").value;
+		var url = "mobile?mob=" + k;
+
+		if (window.XMLHttpRequest) {
+			xmlhttp = new XMLHttpRequest();
+		} else {
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+
+				document.getElementById("krr").innerHTML = xmlhttp.responseText;
+
+			}
+		}
+		xmlhttp.open("GET", url, true);
+		xmlhttp.send();
+	}
+
+	function executeOnSubmit() {
+
+		var res = confirm("Created the new user successfully!");
+
+		if (res)
+			return true;
+		else
+			return false;
+	}
+
+</script>
+
+<style>
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+}
+</style>
+</head>
+<body onload="StartTimers(); document.forms[0].reset();" onmousemove="ResetTimers();">
+	<div id="timeout"></div>
+	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+		</div>
+
+		<div id="navbar" class="collapse navbar-collapse">
+			<div class="topnav">
+				<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right">
+					<li><a href="dashboard"><span
+							class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
+					<li><a href="reports"><span
+							class="glyphicon glyphicon-equalizer"></span>Reports</a></li>
+					<li><a href="candidateinfo"><span
+							class="glyphicon glyphicon-user" data-toggle="tooltip"></span>
+							Candidates </a></li>
+					<li><a href="require"><span
+							class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
+					<security:authorize  access="hasAnyRole('ROLE_SUPERADMIN','ROLE_ADMIN') ">
+					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+					</security:authorize>
+					<li><a><span class="glyphicon glyphicon-user"></span>
+							 </a></li>
+					<li><a href="login"><span
+							class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+					<li><a><span></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="main-content">
+		<div id="main" class="col-sm-12">
+			<br>
+			<br>
+			<br>
+			<h2 align="center">ADD NEW USER</h2>
+			<br>
+			<div class="container">
+				<div class="row">
+					<form action="save6" class="col-md-12 go-right" path="content"
+						method="post" data-toggle="validator" role="form"
+						onsubmit="return executeOnSubmit();">
+						<br>
+						<div class="row">
+							<div class="col-sm-3 form-group">
+								<label class="required">E.CODE</label> <input id="" name="ecode"
+									type="text" placeholder="Enter the Ecode here"
+									onkeypress="return isNumber(event)"
+									class="form-control" required>
+
+							</div>
+							<div class="col-sm-3 form-group">
+								<label class="required">FIRST NAME</label> <input id=""
+									name="firstname" pattern=".*\S+.*" type="text"
+									placeholder="Enter first name here" class="form-control txtOnly" onkeyup="if(this.textLength != 0) {subnewtopic.disabled = false} else {subnewtopic.disabled = true}"
+									required>
+
+							</div>
+							<div class="col-sm-3 form-group">
+								<label class="required">LAST NAME</label> <input id=""
+									name="lastname" pattern=".*\S+.*" type="text"
+									placeholder="Enter last name here" class="form-control txtOnly"
+									required>
+
+							</div>
+							<div class="col-sm-3 form-group">
+								<label class="required">USER NAME</label> <input 
+									name="username" style="background:none;" pattern=".*\S+.*" type="text"
+									placeholder="Enter user Name here" class="form-control" readonly  
+     onfocus="this.removeAttribute('readonly');" 
+									required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3 form-group">
+								<label class="required">TEAM</label> <input id="" name="team"
+									pattern=".*\S+.*" type="text"
+									placeholder="Enter the team Name here" class="form-control"
+									required>
+
+							</div>
+							<div class="col-sm-3 form-group">
+								<label class="required">EMAIL</label> <input id="email" name="email"
+									type="email" placeholder="Enter email here"
+									class="form-control" required>
+							</div>
+							<div class="col-sm-3 form-group">
+								<label class="required">PASSWORD</label> <input id=""
+									name="password" type="password"
+									placeholder="Enter password here" class="form-control" required>
+
+							</div>
+							<div class="col-sm-3 form-group">
+								<label class="required">USER ROLES</label> <select
+									class="form-control list1" id="title" name="roles"
+									onChange="OnDropDownStatus(this);" required>
+									<option value="" style="background-color: white">none</option>
+									<option value="Admin Authentication Manager"
+										style="background-color: white">Admin Authentication Manager</option>
+									<option value="Super Admin/HR Manager"
+										style="background-color: white">Super Admin/HR Manager</option>
+									<option value="HR/Recruiter" style="background-color: white">HR/Recruiter</option>
+									<option value="Project Manager/Lead"
+										style="background-color: white">Project Manager/Lead</option>
+								</select>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3 form-group">
+								<label class="required">STATUS</label>
+								<!-- <input id="" name="status" type="tel" class="form-control" required> -->
+								<!-- <label class="required" class="space"> -->
+								<!-- <input
+									type="radio" name="status" value="In-Active">In-Active</label> -->
+								<select class="form-control list1" id="title" name="status"
+									required>
+									<option value="" style="background-color: white">none</option>
+									<option value="Active" style="background-color: white">Active</option>
+									<option value="In-Active" style="background-color: white">In-Active</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-11 text-center">
+
+							<button type="submit" class="btn btn-default">Save</button>
+							<button class="btn btn-default " name="subnewtopic"
+								onClick="return confirm('Are you absolutely sure you want to delete?')"
+								type="reset" disabled="disabled">Clear</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+		<div class="footer">
+		<p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+	</div>
+</body>
+<script>
+var EmailDomainSuggester = {
+		  
+		  domains: ["srinsofttech.com"],
+		  
+		  bindTo: $('#email'),
+		  
+		  init: function() {
+		    this.addElements();
+		    this.bindEvents();
+		  },
+		  
+		  addElements: function() {
+		    // Create empty datalist
+		    this.datalist = $("<datalist />", {
+		      id: 'email-options'
+		    }).insertAfter(this.bindTo);
+		    // Corelate to input
+		    this.bindTo.attr("list", "email-options");
+		  },
+		  
+		  bindEvents: function() {
+		    this.bindTo.on("keyup", this.testValue);
+		  },
+		    
+		  testValue: function(event) {
+		    var el = $(this),
+		        value = el.val();
+		                    
+		    // email has @
+		    // remove != -1 to open earlier
+		    if (value.indexOf("@") != -1) {
+		      value = value.split("@")[0];
+		      EmailDomainSuggester.addDatalist(value); 
+		    } else {
+		      // empty list
+		      EmailDomainSuggester.datalist.empty();
+		    }
+		     
+		  },
+		  
+		  addDatalist: function(value) {
+		    var i, newOptionsString = "";
+		    for (i = 0; i < this.domains.length; i++) {
+		      newOptionsString += 
+		        "<option value='" + 
+		          value + 
+		          "@" +
+		          this.domains[i] +
+		        "'>";
+		    }
+		    
+		    // add new ones
+		    this.datalist.html(newOptionsString);
+		  }
+		  
+		}
+
+		EmailDomainSuggester.init();
+	//Set timeout variables.
+	var timoutWarning = 60000; // Display warning in 14 Mins.
+	var timoutNow = 900000; // Timeout in 15 mins.
+	var logoutUrl = 'login'; // URL to logout page.
+	var warningTimer;
+	var timeoutTimer;
+
+	// Start timers.
+	function StartTimers() {
+		warningTimer = setTimeout("IdleWarning()", timoutWarning);
+		timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+	}
+
+	// Reset timers.
+	function ResetTimers() {
+		clearTimeout(warningTimer);
+		clearTimeout(timeoutTimer);
+		StartTimers();
+		$("#timeout").dialog('close');
+	}
+
+	$('.txtOnly').keypress(function (e) {
+		var regex = new RegExp("^[a-zA-Z]+$");
+		var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+		if (regex.test(str)) {
+			return true;
+		}
+		else
+		{
+		e.preventDefault();
+		$('.error').show();
+		$('.error').text('Please Enter Alphabate');
+		return false;
+		}
+	});
+	// Show idle timeout warning dialog.
+	function IdleWarning() {
+		$("#timeout").dialog({
+			modal : true
+		});
+	}
+
+	// Logout the user.
+	function IdleTimeout() {
+		window.location = logoutUrl;
+	}
+</script>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<title>Candidate Details</title>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- <%-- <link rel="stylesheet" type="text/css"
+	href="<c:url value="/css/bootstrap-3.3.7/dist/css/bootstrap-table.min.css"/>"> --%> -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+	
+<script type="text/javascript"
+	src="<c:url value="/scripts/jquery-3.3.1.min.js"/>"></script>
+<!-- %-- <script type="text/javascript"
+	src="<c:url value="/resources/css/bootstrap-3.3.7/dist/js/bootstrap.min.js"/>"></script> --%> -->
+<script type="text/javascript"
+	src="<c:url value="/scripts/bootstrap-table.js"/>"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+th{
+background-color:red;
+color:white;
+}
+
+.navbar-inverse .navbar-nav>li>a{
+	 color: #ffffff;
+</style>
+
+</head>
+<body>
+<div>
+</div>
+	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+		</div>
+		
+		<div id="navbar" class="collapse navbar-collapse">
+			<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right">
+			
+					<li><a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
+					<li><a href="reports"><span class="glyphicon glyphicon-equalizer"></span>Reports</a></li>
+					<li><a href="candidateinfo"><span class="glyphicon glyphicon-user" data-toggle="tooltip"></span> Candidates </a></li>
+					<li><a href="require"><span class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
+					
+					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+					
+					<li><a href="login"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+					<li><a><span></span></a></li>
+				</ul> 
+				</div>
+				</div>
+	</nav>
+	<div class="main-content">
+		<br>
+		<br>
+		<h2 style="text-align: center;">VIEW CANDIDATES</h2>
+		<!-- <div id="toolbar">
+
+			<button id="export" class="btn btn-default">Export Excel</button>
+			
+		</div> -->
+		
+		<div id=candidate class="tabcontent">
+			<div class="card-block" id="main">
+			<table id="eventsTable" class="table table-bordered" >
+					<thead>
+						<tr>
+							<!-- <th data-field="id">TRF ID</th> -->
+							<th data-field="id">CANDIDATE ID</th>
+							<th class="no-sort"  data-field="firstName">FIRST NAME</th>
+							<th class="no-sort"  data-field="lastName">LAST NAME</th>
+							<th class="no-sort"  data-field="email">EMAIL ADDRESS</th>
+							<th class="no-sort"  data-field="mobile">MOBILE NUMBER</th>
+							<th class="no-sort" data-field="street">CURRENT LOCATION</th>
+							<th class="no-sort" data-field="experience">EXPERIENCE</th>
+							<th class="no-sort" data-field="highestQualification">HIGHEST QUALIFICATION</th>
+							<th class="no-sort" data-field="previousCompany">CURRENT COMPANY</th>
+							<th class="no-sort" data-field="currentJobTitle">CURRENT DESIGNATION</th>
+							<th class="no-sort" data-field="specialization">SPECIALIZATION</th>
+							<th class="no-sort" data-field="referredBy">REFERENCE</th>
+							<th  class="no-sort"data-field="source">SOURCE</th>
+							<th  class="no-sort"data-field="hrName">SOURCED BY</th>
+							<security:authorize  access="hasAnyRole('ROLE_SUPERADMIN','ROLE_ADMIN') ">
+							<th class="no-sort">Add Interview</th>
+							</security:authorize>
+							<th class="no-sort">Add EEF(req)</th>
+							</security:authorize>
+							
+							<security:authorize  access="hasAnyRole('ROLE_ADMIN') ">
+							<th class="no-sort">Add EEF(HR)</th>
+							</security:authorize>
+							<!-- <th>Resume Download</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="" var="candidate">
+							<tr>
+								<td></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<security:authorize  access="hasAnyRole('ROLE_SUPERADMIN','ROLE_ADMIN') ">
+								<td><a href="addInterview?id="" class="btn btn-primary btn-sm"><i
+								class="glyphicon glyphicon-edit"></i></a></td>
+								</security:authorize>
+								<security:authorize  access="hasAnyRole('ROLE_TECHNICALMANAGER') ">
+											<td><a href="addForm" class="btn btn-primary btn-sm"><i
+								class="glyphicon glyphicon-plus"></i></a></td>
+												</security:authorize>
+								<security:authorize  access="hasAnyRole('ROLE_ADMIN') ">
+								<td><a href="employeeHR" class="btn btn-primary btn-sm"><i
+								class="glyphicon glyphicon-plus"></i></a></td>
+												</security:authorize>
+								<!-- <td><i class="glyphicon glyphicon-plus">Download</i></a> 
+								</td> -->
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+<div class="footer">
+  <p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+</div>
+</body>
+<script>
+$(document).ready(function() {
+    $('#eventsTable').DataTable( {
+        dom: 'Bfrtip',
+        "scrollY":        "400px",
+        "scrollCollapse": true,
+        "scrollX": true,
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        buttons: [
+            'excelHtml5'
+        ],
+    "columnDefs": [ {
+        "targets": 'no-sort',
+        "orderable": false,
+        
+    }]
+    
+    } );
+    
+} );
+/* $('a').click(function(e) {
+    e.preventDefault();  //stop the browser from following
+    window.location.href = '';
+}); */
+//Set timeout variables.
+var timoutWarning = 60000; // Display warning in 14 Mins.
+var timoutNow = 900000; // Timeout in 15 mins.
+var logoutUrl = 'login'; // URL to logout page.
+var warningTimer;
+var timeoutTimer;
+
+// Start timers.
+function StartTimers() {
+    warningTimer = setTimeout("IdleWarning()", timoutWarning);
+    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+}
+
+// Reset timers.
+function ResetTimers() {
+    clearTimeout(warningTimer);
+    clearTimeout(timeoutTimer);
+    StartTimers();
+    $("#timeout").dialog('close');
+}
+
+// Show idle timeout warning dialog.
+function IdleWarning() {
+    $("#timeout").dialog({
+        modal: true
+    });
+}
+
+// Logout the user.
+function IdleTimeout() {
+    window.location = logoutUrl;
+}
+</script>
+</html>

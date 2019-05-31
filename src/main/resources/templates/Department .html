@@ -1,0 +1,243 @@
+
+
+<!doctype html>
+<html>
+<title>Talent Acquisition Portal</title>
+
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- <script type="text/javascript"
+	src="<c:url value="/scripts/Department.js"/>"></script> -->
+
+
+<style>
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+}
+.navbar-inverse .navbar-nav>li>a {
+	color: white ;
+</style>
+<script>
+	function executeOnSubmit() {
+
+		var res = confirm("Create New Team successfully!");
+
+		if (res)
+			return true;
+		else
+			return false;
+	}
+</script>
+</head>
+<body onload="StartTimers();" onmousemove="ResetTimers();">
+	<div id="timeout"></div>
+	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+		</div>
+
+		<div id="navbar" class="collapse navbar-collapse">
+			<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right"> 
+			<
+					<li><a href="dashboard"><span
+							class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
+					<li><a href="reports"><span
+							class="glyphicon glyphicon-equalizer"></span>Reports</a></li>
+					<li><a href="candidateinfo"><span
+							class="glyphicon glyphicon-user" data-toggle="tooltip"></span>
+							Candidates </a></li>
+					<li><a href="require"><span
+							class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
+					
+					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+					
+					<li><a><span class="glyphicon glyphicon-user"></span>
+							 </a></li>
+					<li><a href="login"><span
+							class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+					<li><a><span></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="main-content">
+		<div id="main" class="col-sm-12">
+			<br> <br> <br>
+			<h2 align="center">ADD TEAM</h2>
+			<br>
+			<div class="container">
+				<div class="row">
+					<form action="save3" class="col-md-10 go-right" path="content"
+						method="post" data-toggle="validator" role="form"
+						onsubmit="return executeOnSubmit();">
+						<br>
+						<div class="row">
+
+							<div class="col-sm-6 form-group">
+								<label class="required">TEAM</label> <input id="" name="team" pattern=".*\S+.*"
+									type="text" placeholder="" class="form-control"
+									required>
+
+							</div>
+							<div class="col-sm-6 form-group">
+								<label class="required">TALENT REQUISITION FORM APPROVER</label>
+								<input id="" name="mprApprover" type="text" pattern=".*\S+.*"
+									placeholder=""
+									class="form-control" required>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								<label class="required">SERVICE LINE</label> <input id=""
+									name="departmentName" type="text" pattern=".*\S+.*"
+									placeholder="" class="form-control"
+									required>
+
+							</div>
+							<div class="col-sm-6 form-group">
+								<label class="required">TRF EMAIL COPIED TO</label> <input id="email"
+									name="cc" type="email" onkeyup="loadEmail()" placeholder=" "
+									class="form-control" required>
+
+							</div>
+						</div>
+						<div class="col-sm-12 text-center">
+
+							<button type="submit" class="btn btn-default">Save</button>
+							<button class="btn btn-default "
+								onClick="return confirm('Are you absolutely sure you want to delete?')"
+								type="reset">Clear</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+	</div>
+</body>
+<script>
+var EmailDomainSuggester = {
+		  
+		  domains: ["yahoo.com", "gmail.com", "google.com", "hotmail.com", "googlemail.com", "msn.com", "hotmail.co.uk", "yahoo.co.uk"],
+		  
+		  bindTo: $('#email'),
+		  
+		  init: function() {
+		    this.addElements();
+		    this.bindEvents();
+		  },
+		  
+		  addElements: function() {
+		    // Create empty datalist
+		    this.datalist = $("<datalist />", {
+		      id: 'email-options'
+		    }).insertAfter(this.bindTo);
+		    // Corelate to input
+		    this.bindTo.attr("list", "email-options");
+		  },
+		  
+		  bindEvents: function() {
+		    this.bindTo.on("keyup", this.testValue);
+		  },
+		    
+		  testValue: function(event) {
+		    var el = $(this),
+		        value = el.val();
+		                    
+		    // email has @
+		    // remove != -1 to open earlier
+		    if (value.indexOf("@") != -1) {
+		      value = value.split("@")[0];
+		      EmailDomainSuggester.addDatalist(value); 
+		    } else {
+		      // empty list
+		      EmailDomainSuggester.datalist.empty();
+		    }
+		     
+		  },
+		  
+		  addDatalist: function(value) {
+		    var i, newOptionsString = "";
+		    for (i = 0; i < this.domains.length; i++) {
+		      newOptionsString += 
+		        "<option value='" + 
+		          value + 
+		          "@" +
+		          this.domains[i] +
+		        "'>";
+		    }
+		    
+		    // add new ones
+		    this.datalist.html(newOptionsString);
+		  }
+		  
+		}
+
+		EmailDomainSuggester.init();
+	//Set timeout variables.
+	var timoutWarning = 60000; // Display warning in 14 Mins.
+	var timoutNow = 900000; // Timeout in 15 mins.
+	var logoutUrl = 'login'; // URL to logout page.
+	var warningTimer;
+	var timeoutTimer;
+
+	// Start timers.
+	function StartTimers() {
+		warningTimer = setTimeout("IdleWarning()", timoutWarning);
+		timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+	}
+
+	// Reset timers.
+	function ResetTimers() {
+		clearTimeout(warningTimer);
+		clearTimeout(timeoutTimer);
+		StartTimers();
+		$("#timeout").dialog('close');
+	}
+
+	// Show idle timeout warning dialog.
+	function IdleWarning() {
+		$("#timeout").dialog({
+			modal : true
+		});
+	}
+
+	// Logout the user.
+	function IdleTimeout() {
+		window.location = logoutUrl;
+	}
+</script>
+</html>
+

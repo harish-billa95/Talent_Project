@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Talent Acquisition Portal</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<!-- <script type="text/javascript"
+	src="<c:url value="/resources/scripts/createMPR.js"/>"></script> -->
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+   
+}
+</style>
+</head>
+<body onload="StartTimers(); document.forms[0].reset();" onmousemove="ResetTimers();">
+<div id="timeout">
+<!--     <h1>Session About To Timeout</h1>
+    <p>You will be automatically logged out in 1 minute.<br />
+    To remain logged in move your mouse over this window. -->
+</div>
+	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+				
+					<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right">
+				
+				
+					<li><a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
+					<li><a href="reports"><span class="glyphicon glyphicon-equalizer"></span>Reports</a></li>
+					<li><a href="candidateinfo"><span class="glyphicon glyphicon-user" data-toggle="tooltip"></span> Candidates </a></li>
+					<li><a href="require"><span class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
+				
+					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+	
+					<li><a><span class="glyphicon glyphicon-user"></span>  </a></li>
+					<li><a href="login"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+					<li><a><span></span></a></li>
+				</ul> 
+				</div>
+				</div>
+	</nav>
+	<div class="container">
+	<br>
+	<br>
+		<h2 align="center">TALENT REQUISITION FORM</h2>
+		
+		<!-- <ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#home">Requestor</a></li>
+			 <li><a data-toggle="tab" href="#menu1">HR MANAGER</a></li>
+		</ul> -->
+
+		<!-- <div class="tab-content"> -->
+		<!-- <div class="row">
+		<div class="required">- Mandatory</div>
+			</div> -->
+			<div id="home" class="tab-pane fade in active">
+				<form action="saveMPRForm" method="post" data-toggle="validator"
+					role="form" onsubmit="return executeOnSubmit();">
+					<!-- <%-- <center> -->
+					<!-- <h2 align="center">
+						ManPower Requisition Form
+						</h1> -->
+				<!-- </center> --%> -->
+					
+					<!-- <div class="required">- Mandatory</div> -->
+					<br>
+					<div class="row">
+					
+						<div class="col-sm-11">
+							<div class="row">
+							
+								<div class="col-sm-3 form-group ">
+									<label class="required">REQUESTOR</label> <input type="text"
+										name="requestingManager" value="" pattern="[a-zA-Z0-9\s]+"
+										class="form-control" placeholder=""
+										readonly>
+								</div>
+								<div class="col-sm-3 form-group ">
+									<label class="required">DEPARTMENT NAME</label> 
+									<select name="departmentName" class="form-control" onChange="myFunction()" required>
+										<option value=""></option>
+										<c:forEach items="" var="category">
+											<option value=""></option>
+										</c:forEach>
+									</select>
+								</div>
+								<div class="col-sm-3 form-group ">
+									<label class="required">NO OF POSITION</label> <input onkeyup="if(this.textLength != 0) {clear.disabled = false} else {clear.disabled = true}"
+										type="text" name="position"
+										placeholder=""
+										onkeypress="return isNumber(event)"
+										class="form-control" required>
+										
+								</div>
+								<div class="col-sm-3 form-group ">
+										<label class="required">GENDER</label> <select
+										class="form-control" name="gender" required>
+										<option value=""></option>
+										<option name="gender" value="Male">Male</option>
+										<option name="gender" value="Female">Female</option>
+										<option name="gender" value="Both">Both</option>
+									</select>
+									
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="col-sm-3 form-group  ">
+									<label class="required">POSITION NAME</label> <input
+										type="text"   name="positionName" 
+										placeholder="" 
+										 pattern=".*\S+.*" class="form-control"  required>
+								</div>
+
+								<div class="col-sm-3 form-group ">
+									<label class="required">EXPERIENCE</label> <select
+										class="form-control" name="experience" required>
+										<option value=""></option>
+									<!-- 	<c:forEach items="" var="category">
+											<option value="${category.years}">${category.years}</option>
+										</c:forEach> -->
+									</select>
+								</div>
+								
+								<div class="col-sm-3 form-group ">
+									<label class="required">SHIFT TIMINGS</label> <select
+										class="form-control" name="shiftTimings" required>
+										<option value=""></option>
+										<option name="shiftTimings" value="general">General</option>
+										<option name="shiftTimings" value="rotational">Rotational</option>
+									</select>
+								</div>
+								
+								<!-- <div class="col-sm-3 form-group ">
+									<label>SHIFT TIMINGS</label> <input type="radio"
+										name="shiftTimings" value="general" checked>General<br>
+									<input type="radio" name="shiftTimings" value="rotational">Rotational
+								</div> -->
+								<div class="col-sm-3 form-group ">
+									<label class="required">HIRE TYPE</label> <select
+										class="form-control" name="hireInfo" required>
+										<option value=""></option>
+										<option name="hireInfo" value="new">New</option>
+										<option name="hireInfo" value="replacement">Replacement</option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 form-group">
+									<label class="required">CURRENT TEAM SIZE </label> <input
+										type="text" name="teamSize" placeholder=""
+										onkeypress="return isNumber(event)"
+										class="form-control" required>
+								</div>
+								<!-- <div class="col-sm-3 form-group bluebox">
+									<label class="required">PROJECT START DATE</label> <input
+										type="text" name="completionDate" placeholder="dd/mm/yyyy"
+										class="form-control" required>
+								</div>  -->
+								<div class="col-sm-3 form-group bluebox">
+									<label class="required">TRF RECEIVED DATE</label> <input
+										type="text" id="demo" name="mprDate" value=""
+										class="form-control" readonly>
+								</div>
+								<div class="col-sm-3 form-group">
+									<label class="required">SUPERVISOR </label> <input type="text"
+										name="supervisior" placeholder="" pattern=".*\S+.*"
+										class="form-control my-field" required>
+								</div>
+								<div class="col-sm-3 form-group redbox">
+									<label class="required">EXPECTED CLOSE DATE</label> <input
+										type="text" name="closingDate"
+										class="form-control datavalue" value="" required readonly>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-12 form-group">
+									<label class="required"> <b>KEY RESPONSIBILITIES
+											AREA/JOB DESCRIPTION</b></label>
+									<textarea placeholder="" pattern=".*\S+.*"
+										name="responsibilties" rows="3" class="form-control  my-field" required></textarea>
+								</div>
+
+								<div class="col-sm-12 form-group">
+									<label class="required">SKILL SET </label>
+									<textarea placeholder="" rows="3" pattern=".*\S+.*"
+										name="skillSet" class="form-control my-field" required></textarea>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-3 form-group redbox">
+									<label class=""> DOMAIN EXPERTISE </label> <input type="text" pattern=".*\S+.*"
+										placeholder=""
+										name="domainExpertise" class="form-control txtOnly">
+								</div>
+								<!-- <div class="col-sm-3 form-group bluebox">
+									<label class="">OTHER SKILL SET </label> <input type="text"
+										placeholder="Other Skills Here.." name="otherSills"
+										class="form-control">
+								</div> -->
+								<div class="col-sm-3 form-group bluebox">
+									<label>VISA TYPE(H1B,B1) </label> <select class="form-control"
+										name="visaType">
+										<option>--Select--</option>
+										<option name="visaType" value="NA">NA</option>
+										<option name="visaType" value="H1B">H1B</option>
+										<option name="visaType" value="B1">B1</option>
+									</select>
+								</div>
+							</div>
+
+							<br>
+							<div class="col-sm-11 text-center">
+								<button type="submit" class="btn btn-default">Save</button>
+								<button class="btn btn-default" name="clear" onClick="return confirm('Are you absolutely sure you want to delete?')" type="reset" disabled="disabled">Clear</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+
+<!-- HR Manager -->
+			<div id="menu1" class="tab-pane fade">
+				<br>
+				<form action="saveMPRForm" method="post" data-toggle="validator"
+					role="form" onsubmit="return executeOnSubmit();" float:left>
+					<div class="row">
+						<div class="col-sm-3 form-group redbox">
+							<label>PROJECTIONS</label>
+						</div>
+						<div class="col-sm-3 form-group bluebox">
+							<label>ACTUALS</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 form-group redbox">
+							<label>ALREADY AVALIABLE PROFILE<BR> DATABANK
+							</label> <input type="text" placeholder=""
+								name="profileDatabank" class="form-control">
+						</div>
+						<div class="col-sm-3 form-group bluebox">
+							<label>PIPELINE PROFILES <BR>REQUIRED
+							</label> <input type="text" placeholder=""
+								name="pipelineProfile" class="form-control">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-3 form-group redbox">
+							<label>ESTIMATED TIMELINE FOR<BR> SOURCING
+							</label> <input type="text"
+								placeholder=""
+								name="timelineSourcing" class="form-control">
+						</div>
+						<div class="col-sm-3 form-group bluebox">
+							<label>ESTIMATED TOTAL TIME REQUIRED TO <BR>ONBOARD
+							</label> <input type="text" placeholder=""
+								name="timeOnBoard" class="form-control">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 form-group redbox">
+							<label>COMPENSATION BENCHMARK<BR>(FOR HR)-Budget
+								Guidelines, GAP
+							</label> <input type="text" placeholder=""
+								name="benchMark" class="form-control">
+						</div>
+						<div class="col-sm-3 form-group bluebox">
+							<label>OTHER <BR>RECOMMENDATIONS
+							</label> <input type="text" placeholder="Please Specify Others .."
+								name="otherRecommend" class="form-control">
+						</div>
+					</div>
+					<BR> <br>
+					<div class="row">
+						<div class="col-sm-10 form-group">
+							<textarea placeholder="" rows="3"
+								class="form-control"></textarea>
+							<br>
+							<div class="row">
+								<div class="col-sm-3 form-group redbox">
+									<label>RECOMMENDED BY</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 form-group redbox">
+									<label class="required">FUNCTIONAL HEAD</label> <input
+										type="text" required name="functionHead"
+										placeholder=""
+										class="form-control">
+								</div>
+								<div class="col-sm-3 form-group bluebox">
+									<label class="required">GENERAL HR MANAGER</label> <select
+										class="form-control" name="gender" required>
+										<option value="">--Select--</option>
+										<option value="Male">SENTHIL V.R</option>
+										<option value="Female">MUTHU KUMAR</option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 form-group redbox">
+									<label class="required">APPROVED</label> <select
+										name="approved" class="form-control" required>
+										<option name="approved" value="">--Select--</option>
+										<option name="approved" value="yes">Yes</option>
+										<option name="approved" value="no">No</option>
+									</select>
+								</div>
+								<div class="col-sm-3 form-group redbox">
+									<label>APPROVED BY</label><input type="text" id="picked"
+										placeholder="" name="approvedby"
+										class="form-control">
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+					<div class="col-sm-11 text-center">
+						<button type="submit" class="btn btn-default">SAVE</button>
+						<button class="btn btn-default" name="clear" type="reset" disabled="disabled">CLEAR</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<br><br>
+		<div class="footer">
+  <p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+</div>
+	</div>
+	
+</body>
+<script>
+
+/* function reset() {
+	  var r = confirm("Are you sure you want to reset all text?");
+	  if (r == true) {
+	    form.reset();
+	  }
+	} */
+	/* 
+	$('input').keypress(function( e ) {
+	    if(e.which === 32) 
+	        return false;
+	}); */
+	$('.textarea').keypress(function( e ) {
+	    if(e.which === 32) 
+	        return false;
+	});
+	function myFunction() {
+
+		var x = document.getElementById("mprApprover").value;
+		document.getElementById("picked").value = x;
+		console.log(x);
+	}
+	
+	$("select[name=experience]").on("change", function() {
+		  var ddate = new Date();
+			//alert($(this).val());
+		  switch ($(this).val()) {
+		    case "0-1":
+		    	ddate.setDate(ddate.getDate() + 15);
+		      break;
+		    case "1-6":
+		    	ddate.setDate(ddate.getDate() + 25);
+		      break;
+		    case "6-13":
+		    	ddate.setDate(ddate.getDate() + 35);
+		      break;
+		    case "13+":
+		    	ddate.setDate(ddate.getDate() + 40);
+		      break;
+		    default:
+		  }
+		    $(".datavalue").val(ddate)
+		});
+	
+	
+	function convert(ddate) {
+	    var date = new Date(ddate),
+	        mnth = ("0" + (date.getMonth()+1)).slice(-2),
+	        day  = ("0" + date.getDate()).slice(-2);
+	    return [ date.getFullYear(), mnth, day ].join("/");
+	}
+	
+	//Set timeout variables.
+	var timoutWarning = 60000; // Display warning in 14 Mins.
+	var timoutNow = 900000; // Timeout in 15 mins.
+	var logoutUrl = 'login'; // URL to logout page.
+	var warningTimer;
+	var timeoutTimer;
+
+	// Start timers.
+	function StartTimers() {
+	    warningTimer = setTimeout("IdleWarning()", timoutWarning);
+	    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+	}
+
+	// Reset timers.
+	function ResetTimers() {
+	    clearTimeout(warningTimer);
+	    clearTimeout(timeoutTimer);
+	    StartTimers();
+	    $("#timeout").dialog('close');
+	}
+
+	// Show idle timeout warning dialog.
+	function IdleWarning() {
+	    $("#timeout").dialog({
+	        modal: true
+	    });
+	}
+
+
+/* 	$('.txtOnly').keypress(function (e) {
+				var regex = new RegExp("^[a-zA-Z]+$");
+				var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+				if (regex.test(str)) {
+					return true;
+				}
+				else
+				{
+				e.preventDefault();
+				$('.error').show();
+				$('.error').text('Please Enter Alphabate');
+				return false;
+				}
+			}); */
+	// Logout the user.
+	function IdleTimeout() {
+	    window.location = logoutUrl;
+	}
+	
+	function isNumber(evt) {
+	    evt = (evt) ? evt : window.event;
+	    var charCode = (evt.which) ? evt.which : evt.keyCode;
+	    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+	        return false;
+	    }
+	    return true;
+	}
+	function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+	
+	function testInput(event) {
+		   var value = String.fromCharCode(event.which);
+		   var pattern = new RegExp(/[a-zåäö ]/i);
+		   return pattern.test(value);
+		}
+
+		$('.my-field').bind('keypress', testInput);
+</script>
+</html>
+

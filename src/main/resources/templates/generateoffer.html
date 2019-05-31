@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Talent Acquisition Portal</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+
+<script type="text/javascript"
+	src="C:\Users\sukanta\Desktop\bootstrap-min.js"></script>
+<script type="text/javascript"
+	src="C:\Users\sukanta\Desktop\bootstrap-table.js"></script>
+<script type="text/javascript"
+	src="C:\Users\sukanta\Desktop\genie.js"></script>
+
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+
+.navbar-inverse .navbar-nav>li>a{
+	 color: #ffffff;
+}
+</style>
+
+</head>
+<body onload="StartTimers();" onmousemove="ResetTimers();">
+<div id="timeout">
+</div>
+	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+		</div>
+
+		<div id="navbar" class="collapse navbar-collapse">
+			<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right">
+			
+					<li><a href="dashboard"><span
+							class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
+					<li><a href="reports"><span
+							class="glyphicon glyphicon-equalizer"></span>Reports</a></li>
+					<li><a href="candidateinfo"><span
+							class="glyphicon glyphicon-user" data-toggle="tooltip"></span>
+							Candidates </a></li>
+					<li><a href="require"><span
+							class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
+					
+					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+					
+					<li><a><span class="glyphicon glyphicon-user"></span>
+							 </a></li>
+					<li><a href="login"><span
+							class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+					<li><a><span></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="main-content">
+		<div class="container">
+			<br> <br>
+			<h2 align="center">SALARY CALCULATOR</h2>
+<!-- 			<a href="userroles"><button class="btn btn-default">BACK</button></a> <br>
+ -->			<br>
+			<div id="main" class="">
+
+				<!-- <h1 align="center">Department List</h1><br><br><br><br> -->
+				<div class="tab">
+					<button class="tablinks" onclick="reload(event,'TabOne')"
+						id="defaultOpen">Only ESI</button>
+					<button class="tablinks" onclick="reload(event, 'TabTwo')">ESI
+						with PF</button>
+					<button class="tablinks" onclick="reload(event, 'TabThree')">2.8L
+						to 4.99L</button>
+					<button class="tablinks" onclick="reload(event, 'TabFour')">
+						CTC upto 700000</button>
+					<button class="tablinks" onclick="reload(event, 'TabFive')">
+						CTC Above 700000</button>
+				</div>
+
+				<div id="TabOne" class="tabcontent">
+					<div class="row">
+						<form action="generatePDF" method="post">
+							<div class="col-sm-2">
+								<label>Annual CTC</label> <input type="number" id="yearctc"
+									name="annualCTC" class="form-control">
+							</div>
+							<div class="row">
+								<div class="col-sm-2">
+									<label>Monthly Gross</label> <input type="text"
+										id="monthlygross" name="monthlyGross" class="form-control" readonly>
+								</div>
+								<div class="row">
+									<div class="col-sm-2">
+										<label>Net Monthly</label> <input type="text" id="netmonthly"
+											name="netMonthly" class="form-control" readonly>
+									</div>
+									<div class="col-sm-2" style="margin-top:2%;">
+										<button class="btn btn-default" type="button"
+							onClick="reloadTabOne(event,'TabOne');">Calculate</button>
+									</div>
+								</div>
+							</div>
+							<br>
+							<br>
+
+							<div class="col-sm-7 form">
+								<div class="bootstrap-table" style="width: 800px;">
+									<table id="salarytable" class="table table-hover"
+										style="width: 800px;" data-toggle="table" data-height="400"
+										data-show-refresh="" data-show-columns="" align="left">
+										<thead>
+											<tr class="filters">
+												<th data-field="earnings">Earnings</th>
+												<th data-field="permonth">Per Month</th>
+												<th data-field="peryear">Per Year</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							</div>
+						</form>
+					</div>
+					<br>
+					<div class="col-sm-7" align="center">
+						<!-- <button class="btn btn-default" type="button"
+							onClick="reloadTabOne(event,'TabOne');">Calculate</button> -->
+						<!-- <button class="btn btn-default" id="TabOneGenerate">Generate
+											PDF</button> -->
+						<!-- <button><a href="salarymail">Send Mail</a></button> -->
+						<!-- <button class="btn btn-default" onclick="salarymail">Send Mail</button> -->
+					</div>
+				</div>
+				<!-- Tab Two -->
+				<div id="TabTwo" class="tabcontent">
+					<form action="generatePDF" method="post" path="content">
+						<div class="row">
+							<div class="col-sm-2">
+								<label>Annual CTC</label> <input type="number" id="yeactc"
+									name="annuallCTC" class="form-control">
+							</div>
+							<div class="row">
+								<div class="col-sm-2">
+									<label>Monthly Gross</label> <input type="text"
+										id="monthlygrossten" name="monthlyGrossTen"
+										class="form-control" readonly>
+								</div>
+								<div class="row">
+									<div class="col-sm-2">
+										<label>Net Monthly</label> <input type="text"
+											id="netmonthlyten" name="netmonthlyten" class="form-control" readonly>
+									</div>
+									<div class="col-sm-2" style="margin-top:2%;">
+											<button class="btn btn-default" type="button"
+								onClick="reloadTab(event, 'TabTwo');">Calculate</button>
+									</div>
+								</div>
+							</div>
+						</div>
+													<br>
+						<br>
+													
+						<div class="row">
+							<div class="col-sm-6 form">
+								<div class="bootstrap-table" style="width: 800px;">
+									<table id="tabletwo" class="table table-hover"
+										style="width: 800px;" data-toggle="table" data-height="400"
+										data-show-refresh="false" data-show-columns="false">
+										<thead>
+											<tr class="filters">
+												<th data-field="earnings">Earnings</th>
+												<th data-field="permonth">Per Month</th>
+												<th data-field="peryear">Per Year</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="" var="userroles">
+												<tr>
+													<td><c:out value="" /></td>
+													<td><c:out value="" /></td>
+													<td><c:out value="" /></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="col-sm-7" align="center">
+						<!-- 	<button class="btn btn-default" type="button"
+								onClick="reloadTab(event, 'TabTwo');">Calculate</button> -->
+							<!-- <button class="btn btn-default" id="TabOneGenerate">Generate
+										PDF</button> -->
+						</div>
+					</form>
+				</div>
+
+				<!-- Tab three -->
+				<div id="TabThree" class="tabcontent">
+					<div class="row">
+						<form action="generatePDF" method="post" path="content">
+							<div class="col-sm-12 ">
+								<div class="row">
+									<div class="col-sm-2">
+										<label>Annual CTC</label> <input type="number" id="yectc"
+											name="annuulCTC" class="form-control">
+										<p id="demo"></p>
+									</div>
+									<div class="row">
+										<div class="col-sm-2">
+											<label>Monthly Gross</label> <input type="text"
+												id="monthlyGrossAbove" name="monthlyGrossAbove"
+												class="form-control" readonly>
+										</div>
+
+										<div class="row">
+											<div class="col-sm-2">
+												<label>Net Monthly</label> <input type="text"
+													id="netMonthlyAbove" name="netMonthlyAbove"
+													class="form-control" readonly>
+											</div>
+											<div class="col-sm-2" style="margin-top:2%;">
+											<button class="btn btn-default" type="button"
+									onClick="reloadTabThree(event, 'TabThree');">Calculate</button>
+									</div>
+										</div>
+									</div>
+								</div>
+								<br>
+								
+								<div class="bootstrap-table" style="width: 800px;">
+									<table id="tablethree" class="table table-hover"
+										style="width: 800px;" data-toggle="table" data-height="400"
+										data-show-refresh="false" data-show-columns="false">
+										<thead>
+											<tr class="filters">
+												<th data-field="earnings">Earnings</th>
+												<th data-field="permonth">Per Month</th>
+												<th data-field="peryear">Per Year</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="" var="userroles">
+												<tr>
+													<td><c:out value="${useroles.username}" /></td>
+													<td><c:out value="${useroles.email}" /></td>
+													<td><c:out value="${useroles.email}" /></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<br>
+							<div class="col-sm-7" align="center">
+								<!-- <button class="btn btn-default" type="button"
+									onClick="reloadTabThree(event, 'TabThree');">Calculate</button> -->
+								<!-- <button class="btn btn-default" id="TabOneGenerate">Generate
+										PDF</button> -->
+							</div>
+						</form>
+					</div>
+
+				</div>
+
+				<div id="TabFour" class="tabcontent">
+					<div class="row">
+						<form action="generatePDF" method="post" path="content">
+							<div class="col-sm-12 ">
+								<div class="row">
+									<div class="col-sm-2">
+										<label>Annual CTC</label> <input type="number" id="yectcs"
+											name="annuulCTCC" class="form-control">
+										<p id="demo"></p>
+									</div>
+									<div class="row">
+										<div class="col-sm-2">
+											<label>Monthly Gross</label> <input type="text"
+												id="monthlyGrossAbovee" name="monthlyGrossAbovee"
+												class="form-control" readonly>
+										</div>
+										<div class="row">
+											<div class="col-sm-2">
+												<label>Net Monthly</label> <input type="text"
+													id="netMonthlyAbovee" name="netMonthlyAbovee"
+													class="form-control" readonly>
+											</div>
+											<div class="col-sm-2" style="margin-top:2%;">
+											<button class="btn btn-default" type="button"
+									onClick="reloadTabFour(event, 'TabFour');">Calculate</button>
+									</div>
+										</div>
+									</div>
+								</div>
+								<br>
+								<div class="bootstrap-table" style="width: 800px;">
+									<table id="tablefour" class="table table-hover"
+										style="width: 800px;" data-toggle="table" data-height="400"
+										data-show-refresh="false" data-show-columns="false">
+										<thead>
+											<tr class="filters">
+												<th data-field="earnings">Earnings</th>
+												<th data-field="permonth">Per Month</th>
+												<th data-field="peryear">Per Year</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${userrole}" var="userroles">
+												<tr>
+													<td><c:out value="${useroles.username}" /></td>
+													<td><c:out value="${useroles.email}" /></td>
+													<td><c:out value="${useroles.email}" /></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<br>
+							<div class="col-sm-7" align="center">
+								<!-- <button class="btn btn-default" type="button"
+									onClick="reloadTabFour(event, 'TabFour');">Calculate</button> -->
+								<!-- <button class="btn btn-default" id="TabOneGenerate">Generate
+										PDF</button> -->
+							</div>
+						</form>
+					</div>
+
+				</div>
+
+				<!-- TabFive -->
+				<div id="TabFive" class="tabcontent">
+					<div class="row">
+						<form action="generatePDF" method="post" path="content">
+							<div class="col-sm-12 ">
+								<div class="row">
+									<div class="col-sm-2">
+										<label>Annual CTC</label> <input type="number" id="yectcss"
+											name="annuulCTCCC" class="form-control">
+										<p id="demo"></p>
+									</div>
+									<div class="row">
+										<div class="col-sm-2">
+											<label>Monthly Gross</label> <input type="text"
+												id="monthlyGrossAboveee" name="monthlyGrossAboveee"
+												class="form-control" readonly>
+										</div>
+
+										<div class="row">
+											<div class="col-sm-2">
+												<label>Net Monthly</label> <input type="text"
+													id="netMonthlyAboveee" name="netMonthlyAboveee"
+													class="form-control" readonly>
+											</div>
+											<div class="col-sm-2" style="margin-top:2%;">
+											<button class="btn btn-default" type="button"
+									onClick="reloadTabFive(event, 'TabFive');">Calculate</button>
+									</div>
+										</div>
+									</div>
+								</div>
+								<br>
+								<div class="bootstrap-table" style="width: 800px;">
+									<table id="tablefive" class="table table-hover"
+										style="width: 800px;" data-toggle="table" data-height="400"
+										data-show-refresh="false" data-show-columns="false">
+										<thead>
+											<tr class="filters">
+												<th data-field="earnings">Earnings</th>
+												<th data-field="permonth">Per Month</th>
+												<th data-field="peryear">Per Year</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${userrole}" var="userroles">
+												<tr>
+													<td><c:out value="${useroles.username}" /></td>
+													<td><c:out value="${useroles.email}" /></td>
+													<td><c:out value="${useroles.email}" /></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<br>
+							<div class="col-sm-7" align="center">
+								<!-- <button class="btn btn-default" type="button"
+									onClick="reloadTabFive(event, 'TabFive');">Calculate</button> -->
+								<!-- <button class="btn btn-default" id="TabOneGenerate">Generate
+										PDF</button> -->
+								<!-- <button class="btn btn-default"><a href="salarymail"></a>Salary mail
+										</button> -->
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+  <p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+</div>
+	</div>
+
+</body>
+
+<script>
+//Set timeout variables.
+var timoutWarning = 60000; // Display warning in 14 Mins.
+var timoutNow = 900000; // Timeout in 15 mins.
+var logoutUrl = 'login'; // URL to logout page.
+var warningTimer;
+var timeoutTimer;
+
+// Start timers.
+function StartTimers() {
+    warningTimer = setTimeout("IdleWarning()", timoutWarning);
+    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+}
+
+// Reset timers.
+function ResetTimers() {
+    clearTimeout(warningTimer);
+    clearTimeout(timeoutTimer);
+    StartTimers();
+    $("#timeout").dialog('close');
+}
+
+// Show idle timeout warning dialog.
+function IdleWarning() {
+    $("#timeout").dialog({
+        modal: true
+    });
+}
+
+// Logout the user.
+function IdleTimeout() {
+    window.location = logoutUrl;
+}
+</script>
+</html>
+

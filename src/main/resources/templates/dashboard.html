@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html>
+<title>MPR Status</title>
+
+<head>
+<<!-- meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/css/bootstrap-3.3.7/dist/css/bootstrap.min.css"/>"> -->
+<!-- <%-- <link rel="stylesheet" type="text/css"
+	href="<c:url value="/css/bootstrap-3.3.7/dist/css/bootstrap-table.min.css"/>"> --%> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+	
+<!-- <script type="text/javascript"
+	src="<c:url value="/scripts/jquery-3.3.1.min.js"/>"></script> -->
+<!-- <%-- <script type="text/javascript"
+	src="<c:url value="/resources/css/bootstrap-3.3.7/dist/js/bootstrap.min.js"/>"></script> --%> -->
+<!-- <script type="text/javascript"
+	src="<c:url value="/scripts/MPRStatus.js"/>"></script>
+<script type="text/javascript"
+	src="<c:url value="/scripts/export.js"/>"></script> -->
+<!-- <%-- <script type="text/javascript"
+	src="<c:url value="/scripts/bootstrap.min.js"/>"></script>
+<script type="text/javascript"
+	src="<c:url value="/scripts/bootstrap-table.min.js"/>"></script> --%> -->
+<script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+	
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+th{
+background-color:red;
+color:white;
+}
+/* body {
+  font: 96%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 8px 10px;
+  color: #333;
+  background-color: #fff;
+}
+
+table.eventsTable tbody th, table.eventsTable tbody td {
+    padding: 2px 10px; 
+} */
+.navbar-inverse .navbar-nav>li>a {
+	color: white ;
+}
+
+
+</style>
+
+</head>
+<body onload="StartTimers();" onmousemove="ResetTimers();">
+<div id="timeout">
+</div>
+
+	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+
+				<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right"> 
+					<li><a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
+					<li><a href="reports"><span class="glyphicon glyphicon-equalizer"></span>Reports</a></li>
+					<li><a href="candidateinfo"><span class="glyphicon glyphicon-user" data-toggle="tooltip"></span> Candidates </a></li>
+					<li><a href="require"><span class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
+				
+					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+				
+					<li><a><span class="glyphicon glyphicon-user"></span>  </a></li>
+					<li><a href="login"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+					<li><a><span></span></a></li>
+				</ul> 
+				</div>
+				</div>
+	</nav>
+	<div class="main-content">
+		<div class="container">
+		<br/><br/>		<br/><br/>
+			<security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+					<h2 align="center">Overall TRF Report</h2><br>
+					</security:authorize>
+					<security:authorize access="hasAnyRole('ROLE_TECHNICALMANAGER','ROLE_ADMIN') ">
+					<h2 align="center">My TRF Report</h2><br>
+					</security:authorize>
+			<div id="toolbar">
+				<!-- <button id="export" class="btn btn-default" value="excel.xls">Export Excel</button>
+				<a href="candidateinfo"><button class="btn btn-default">CANDIDATE INFO</button></a> -->
+			</div>
+			<div class="row" style="margin-left: -8%;" align="center">
+				<form action="listoftest" method="get" enctype="multipart/form-data"></form>
+				<table id="eventsTable" class="table table-bordered" >
+					<thead>
+						<tr>
+							<!-- <th data-field="id">TRF ID</th> -->
+							<th data-field="id">TRF ID</th>
+							<security:authorize access="hasAnyRole('ROLE_SUPERADMIN','ROLE_ADMIN') ">
+							<th class="no-sort"  data-field="requestingManager">REQUESTOR</th>
+							</security:authorize>
+							<th class="no-sort"  data-field="departmentName">DEPARTMENT</th>
+							<security:authorize access="hasAnyRole('ROLE_TECHNICALMANAGER','ROLE_SUPERADMIN') ">
+							<th class="no-sort"  data-field="assignHr1">HR ASSIGNED</th>
+							</security:authorize>
+							<!-- <th data-field="departmentName">DEPARTMENT / TEAM</th> -->
+							<th class="no-sort"  data-field="position">NO. OF POSITIONS</th>
+							<th class="no-sort"  data-field="source">SOURCED</th>
+							<th  class="no-sort" data-field="candidateStatus">NO. OF SELECTED CANDIDATES</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="" var="mprform">
+								<tr>
+								<!-- 	<%-- <td><c:out value="${mprform.functionDept}" /></td> --%> -->
+									<td><c:out value="" /></td>
+									
+									<td><c:out value="" /></td>
+									
+									<td><c:out value="" /></td> 
+									
+									<td><c:out value="" /></td>
+									
+									<!-- <%-- <td><c:out value="${mprform.departmentName}" /></td> --%> -->
+									<td><c:out value="" /></td>
+									<td></td>
+									<td></td>
+									<!-- <%-- <td><c:out value="${mprform.status}" /></td> --%> -->
+								</tr>
+							</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="footer">
+  <p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+</div>
+	</div>
+	
+</body>
+<script>
+
+$(document).ready(function() {
+    $('#eventsTable').DataTable( {
+        dom: 'Bfrtip',
+        "scrollY":        "400px",
+        "scrollCollapse": true,
+        "scrollX": true,
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        buttons: [
+            'excelHtml5'
+        ],
+    "columnDefs": [ {
+        "targets": 'no-sort',
+        "orderable": false,
+        
+    }]
+    
+    } );
+    
+} );
+//Set timeout variables.
+var timoutWarning = 60000; // Display warning in 14 Mins.
+var timoutNow = 90000; // Timeout in 15 mins.
+var logoutUrl = 'login'; // URL to logout page.
+var warningTimer;
+var timeoutTimer;
+
+//Set timeout variables.
+var timoutWarning = 60000; // Display warning in 14 Mins.
+var timoutNow = 900000; // Timeout in 15 mins.
+var logoutUrl = 'login'; // URL to logout page.
+var warningTimer;
+var timeoutTimer;
+
+// Start timers.
+function StartTimers() {
+    warningTimer = setTimeout("IdleWarning()", timoutWarning);
+    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+}
+
+// Reset timers.
+function ResetTimers() {
+    clearTimeout(warningTimer);
+    clearTimeout(timeoutTimer);
+    StartTimers();
+    $("#timeout").dialog('close');
+}
+
+// Show idle timeout warning dialog.
+function IdleWarning() {
+    $("#timeout").dialog({
+        modal: true
+    });
+}
+
+// Logout the user.
+function IdleTimeout() {
+    window.location = logoutUrl;
+}
+</script>
+</html>

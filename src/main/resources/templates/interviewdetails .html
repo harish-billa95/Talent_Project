@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html>
+<title>Talent Acquisition Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<!-- <script type="text/javascript"
+	src="<c:url value="/resources/scripts/export.js"/>"></script> -->
+<script type="text/javascript"
+	src="C:\Users\sukanta\Desktop\bootstrap-min.js"></script>
+<script type="text/javascript"
+	src="C:\Users\sukanta\Desktop\bootstrap-table.js"></script>
+			<!-- <link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/bootstrap-3.3.7/dist/css/Assign.css"/>"> -->
+	
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+.navbar-inverse .navbar-nav>li>a{
+	 color: #ffffff;
+</style>
+
+</head>
+<body onload="StartTimers();" onmousemove="ResetTimers();">
+<div id="timeout">
+</div>
+	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+		</div>
+		
+		<div id="navbar" class="collapse navbar-collapse">
+			<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right">
+				
+					<li><a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
+					<li><a href="reports"><span class="glyphicon glyphicon-equalizer"></span>Reports</a></li>
+					<li><a href="candidateinfo"><span class="glyphicon glyphicon-user" data-toggle="tooltip"></span> Candidates </a></li>
+					<li><a href="require"><span class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
+				
+					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+				
+					<li><a><span class="glyphicon glyphicon-user"></span>  </a></li>
+					<li><a href="login"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+					<li><a><span></span></a></li>
+				</ul> 
+				</div>
+				</div>
+	</nav>
+	
+	<div class="main-content">
+	<a href="candidates"><button class="btn btn-default">BACK</button></a>
+		<div class="container">
+		<h2 align="center">
+		 Details of Interviewer
+			</h2>
+			<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+					<p>
+						<input type="hidden" name="id" value="" readonly
+							required />
+					</p>
+				</div>
+						<br> 
+						</div><br>
+						<div class="row">
+							<div class="col-sm-6 form-group redbox">
+								<label>CANDIDATE ID</label> <input type="text"
+									placeholder="" name="canid"
+									value="" class="form-control" readonly>
+							</div>
+							<div class="col-sm-6 form-group bluebox">
+								<label for="meeting">CANDIDATE NAME</label> <input type="text"
+									placeholder="" 
+									 name="firstName" value=""
+									class="form-control" readonly> <span id="err"> </span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 form-group redbox ">
+								<label for="meeting">CANDIDATE EMAIL-ID</label> <input type="text"
+									onkeyup="loadEmail()" placeholder="" name="email"
+									value="" class="form-control" readonly>
+
+								<span id="krr"> </span>
+							</div>
+							<div class="col-sm-3 form-group redbox">
+
+								<label class="required">TRF ID</label> <input
+									type="text" placeholder="" name="id" value=""
+									 readonly>
+							</div>
+							<div class="col-sm-6 form-group bluebox">
+								<label>INTERVIEWER NAME</label> <input type="text"
+									placeholder="" name="interviewerName"
+									value="" class="form-control" readonly>
+							</div>
+
+
+						</div>
+						<div class="row">
+							<div class="col-sm-6 form-group redbox">
+								<label>INTERVIEWER E-MAIL ID</label> <input type="text"
+									onkeyup="loadEmail()" placeholder="" name="interviewerEmail"
+									value="" class="form-control" readonly>
+							</div>
+
+							<div class="col-sm-6 form-group bluebox">
+								<label>POSTING TITLE</label> <input type="text"
+									placeholder="" name="postTitle"
+									value="" class="form-control" readonly>
+							</div>
+						</div>
+						<div class="row">
+
+							<div class="col-sm-6 form-group redbox">
+								<label>INTERVIEW DATE</label> <input type="text"
+									placeholder="" name="interviewDate"
+									value="" class="form-control"
+									readonly>
+							</div>
+							<div class="col-sm-6 form-group bluebox">
+								<label>INTERVIEW TYPE</label> <input type="text"
+									placeholder="" id="" name="interviewType"
+									value="" class="form-control"
+									readonly>
+							</div>
+						</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+  <p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+</div>
+</body>
+<script>
+//Set timeout variables.
+var timoutWarning = 60000; // Display warning in 14 Mins.
+var timoutNow = 900000; // Timeout in 15 mins.
+var logoutUrl = 'login'; // URL to logout page.
+var warningTimer;
+var timeoutTimer;
+
+// Start timers.
+function StartTimers() {
+    warningTimer = setTimeout("IdleWarning()", timoutWarning);
+    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+}
+
+// Reset timers.
+function ResetTimers() {
+    clearTimeout(warningTimer);
+    clearTimeout(timeoutTimer);
+    StartTimers();
+    $("#timeout").dialog('close');
+}
+
+// Show idle timeout warning dialog.
+function IdleWarning() {
+    $("#timeout").dialog({
+        modal: true
+    });
+}
+
+// Logout the user.
+function IdleTimeout() {
+    window.location = logoutUrl;
+}
+</script>
+</html>
+			

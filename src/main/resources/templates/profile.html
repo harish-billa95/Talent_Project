@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title></title>
+<link rel="shortcut icon"
+	href="<c:url value="/images/srinsoftlogo.png"/>" />
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<!-- <%-- <script type="text/javascript"
+	src="<c:url value="/resources/css/bootstrap-3.3.7/dist/js/bootstrap.min.js"/>"></script> --%> -->
+<!-- <script type="text/javascript"
+	src="<c:url value="/scripts/viewCandidates.js"/>"></script> -->
+<script type="text/javascript"
+	src="C:\Users\sukanta\Desktop\bootstrap-min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+<script type="text/javascript"
+	src="C:\Users\sukanta\Desktop\bootstrap-table.js"></script>
+<style>
+
+.btn-expand-collapse {
+	position: absolute;
+	display: block;
+	left: 0px;
+	bottom: 0;
+	width: 100%;
+	padding: 8px 0;
+	border-top: solid 1px #2B4F81;
+	color: grey;
+	font-size: 20px;
+	text-align: center;
+}
+
+.btn-expand-collapse:hover, .btn-expand-collapse:focus {
+	background-color: #ebebeb !important;
+	color: #de1110;
+}
+
+.btn-expand-collapse:active {
+	background-color: white;
+}
+
+.main-content {
+	margin-top: 20px;
+	margin-left: 00px;
+	padding: 20px;
+}
+
+.collapsed+.main-content {
+	margin-left: 60px;
+}
+
+body, html {
+	height: 100%;
+	margin: 0;
+}
+
+/* Style the tab */
+.tab {
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+	background-color: #e40a0a;
+}
+
+/* Style the tab content */
+.tabcontent {
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-top: none;
+}
+
+/* Style the tab */
+.tab {
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+	background-color: #e40a0a;
+}
+
+/* Style the tab content */
+.tabcontent {
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-top: none;
+}
+
+/* input[type="text"], textarea {
+	background-color: #d1d1d1;
+}
+
+input[type="date"], textarea {
+	background-color: #d1d1d1;
+}
+
+input[type="email"], textarea {
+	background-color: #d1d1d1;
+}
+
+input[type="password"], textarea {
+	background-color: #d1d1d1;
+}
+
+select.list1 option.option2 {
+	background-color: #d1d1d1;
+}
+ */
+.center {
+	margin: auto;
+	width: 70%;
+	border: 11px;
+	padding: 11px;
+}
+
+/* a {
+	color: white;
+} */
+</style>
+<script>
+	function openCity(evt, cityName) {
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className
+					.replace(" active", "");
+		}
+		document.getElementById(cityName).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+
+	$(function() {
+		var $result = $('#eventsResult');
+
+		$('#eventsTable').on('all.bs.table', function(e, name, args) {
+			console.log('Event:', name, ', data:', args);
+		}).on('click-row.bs.table', function(e, row, $element) {
+			$result.text('Event: click-row.bs.table');
+		}).on('dbl-click-row.bs.table', function(e, row, $element) {
+			$result.text('Event: dbl-click-row.bs.table');
+		}).on('sort.bs.table', function(e, name, order) {
+			$result.text('Event: sort.bs.table');
+		}).on('check.bs.table', function(e, row) {
+			$result.text('Event: check.bs.table');
+		}).on('uncheck.bs.table', function(e, row) {
+			$result.text('Event: uncheck.bs.table');
+		}).on('check-all.bs.table', function(e) {
+			$result.text('Event: check-all.bs.table');
+		}).on('uncheck-all.bs.table', function(e) {
+			$result.text('Event: uncheck-all.bs.table');
+		}).on('load-success.bs.table', function(e, data) {
+			$result.text('Event: load-success.bs.table');
+		}).on('load-error.bs.table', function(e, status) {
+			$result.text('Event: load-error.bs.table');
+		}).on('column-switch.bs.table', function(e, field, checked) {
+			$result.text('Event: column-switch.bs.table');
+		}).on('page-change.bs.table', function(e, number, size) {
+			$result.text('Event: page-change.bs.table');
+		}).on('search.bs.table', function(e, text) {
+			$result.text('Event: search.bs.table');
+		});
+
+		document.getElementById("defaultOpen").click();
+	});
+
+	$(function() {
+		var $table = $('#eventsTable');
+		$('#export').click(function() {
+			$table.tableExport({
+				type : 'excel',
+				escape : false
+			});
+		});
+		$(".btn-expand-collapse").click(function(e) {
+			$(".navbar-primary").toggleClass("collapsed");
+		});
+
+	});
+	
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "250px";
+		document.getElementById("main").style.marginLeft = "250px";
+		document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+	}
+
+	function closeNav() {
+		document.getElementById("mySidenav").style.width = "0";
+		document.getElementById("main").style.marginLeft = "0";
+		document.body.style.backgroundColor = "white";
+	}
+	function OnDropDownType(dropDown) {
+		var selectedValue = dropDown.options[dropDown.selectedIndex].value;
+
+		document.getElementById("roles").value = selectedValue;
+
+	}
+</script>
+
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+.navbar-inverse .navbar-nav>li>a{
+	 color: #ffffff;
+
+</style>
+
+</head>
+<body onload="StartTimers();" onmousemove="ResetTimers();">
+<div id="timeout">
+</div>
+	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+		</div>
+		
+		<div id="navbar" class="collapse navbar-collapse">
+			<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right">
+				
+				
+					<li><a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
+					<li><a href="reports"><span class="glyphicon glyphicon-equalizer"></span>Reports</a></li>
+					<li><a href="candidateinfo"><span class="glyphicon glyphicon-user" data-toggle="tooltip"></span> Candidates </a></li>
+					<li><a href="require"><span class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
+					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+					<li><a><span class="glyphicon glyphicon-user"></span> ${author} </a></li>
+					<li><a href="login"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+					<li><a><span></span></a></li>
+				</ul> 
+				</div>
+				</div>
+	</nav>
+	<div class="main-content">
+		<h2 align="center">SETTINGS</h2>
+		<div class="container">
+		<div class="tab">
+			<button class="tablinks" id="defaultOpen" onclick="openCity(event, 'viewrole')" >USERS</button>
+			<button class="tablinks" onclick="openCity(event, 'addDepartment')">TEAMS</button>
+			<button class="tablinks" onclick="openCity(event, 'slatable')">SLA TABLE</button>
+<!-- 			<button class="tablinks" onclick="openCity(event, 'users')">User Roles</button>
+ -->			<security:authorize access="hasAnyRole('ROLE_SUPERADMIN','ROLE_ADMIN') ">
+			<button class="tablinks" onclick="location.href='salarycalc'">SALARY CALCULATOR</button>
+			</security:authorize>
+			
+		</div>
+		<div id="viewrole" class="tabcontent">
+			<div class="card-block" id="main">
+			<security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+			<a href="addUser" class="btn btn-primary btn-sm"><i
+					class="glyphicon glyphicon-plus"></i></a>
+					</security:authorize>
+					<table id="eventsTable" data-toggle="table" 
+						data-pagination="true" data-search="true"
+						data-show-refresh="false" data-show-toggle="false"
+						data-show-columns="false" data-toolbar="#toolbar">
+						<thead>
+							<tr class="filters">
+							<th data-field="id">S.NO</th>
+							<th data-field="ecode">E.CODE</th>
+							<th data-field="firstname">FIRST NAME</th>
+							<th data-field="lastname">LAST NAME</th>
+							<th data-field="username">USER NAME</th>
+							<th data-field="roles">ROLE</th>
+							<th data-field="team">TEAM</th>
+							<th data-field="email">EMAIL</th>
+							<th data-field="status">STATUS</th>
+							<security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+							<th data-field="update">UPDATE</th>
+							</security:authorize>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="" var="userrole">
+								<tr>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value=""  /></td>
+								<td><c:out value="" /></td>
+								<td><c:out value="" /></td>
+								<security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+								<td><a href="edituser?id=${userrole.id}" class="btn btn-primary btn-sm"><i
+								class="glyphicon glyphicon-edit"></i></a></td>
+								
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+			</div>
+		</div>
+		<div id=addDepartment class="tabcontent">
+			<div class="card-block"  class="table table-hover" id="main">
+				
+				<a href="addDepartment" class="btn btn-primary btn-sm"><i
+					class="glyphicon glyphicon-plus"></i></a>
+			
+				<table id="eventsTable" data-toggle="table" 
+					data-pagination="true" data-search="true" data-show-refresh="false"
+					data-show-toggle="false" data-show-columns="false"
+					data-toolbar="#toolbar">
+					<thead>
+						<tr class="filters">
+							<th data-field="deptid">S.NO</th>
+							<th data-field="team">TEAM</th>
+							<th data-field="mprApprover">TRF APPROVER</th>
+							<th data-field="departmentName">SERVICE LINE</th>
+							<th data-field="cc">TRF EMAIL COPIED TO</th>
+														
+							<th>UPDATE</th>
+													
+							
+														
+							<th>DELETE</th>
+													
+							
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${departments}" var="department">
+							<tr>
+								<td><c:out value="${department.id}" /></td>
+								<td><c:out value="${department.departmentName}" /></td>
+								<td><c:out value="${department.mprApprover}" /></td>
+								<td><c:out value="${department.team}" /></td>
+								<td><c:out value="${department.cc}" /></td>
+							<!-- <a href="addDepartment" class="btn btn-primary btn-sm"><i
+					class="glyphicon glyphicon-plus"></i></a> -->
+					<security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+								<td><a href="editDepartment1?id=${department.id}"class="btn btn-primary btn-sm"><i
+					class="glyphicon glyphicon-edit"></i></a>
+								</td>
+																				
+								<security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+								<td><a href="deleteDepartment1?id=${department.id}"class="btn btn-primary btn-sm"><i
+					class="glyphicon glyphicon-remove-circle" onClick="return confirm('Are you absolutely sure you want to delete?')"></i></a></td>
+																				
+							
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		
+<div id="slatable" class="tabcontent">
+			<div class="card-block" id="main">
+			<!-- 	<%-- <security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+				<a href="addSla" class="btn btn-primary btn-sm"><i
+					class="glyphicon glyphicon-plus"></i></a>
+				</security:authorize> --%> -->
+				<table id="eventsTable" data-toggle="table" data-pagination="true"
+					data-search="true" data-show-refresh="false"
+					data-show-toggle="false" data-show-columns="false"
+					data-toolbar="#toolbar">
+
+					<thead>
+
+						<tr class="filters">
+							<th data-field="experiencelevel">EXPERIENCE LEVEL</th>
+							<th data-field="years">YEARS</th>
+							<th data-field="sladays">SLA DAYS</th>
+						<!-- <%-- <security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+							<th>UPDATE</th>
+						</security:authorize>
+							<security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+							<th>DELETE</th>
+													</security:authorize> --%>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${slatables}" var="slatable">
+							<tr>
+								<td><c:out value="${slatable.experiencelevel}" /></td>
+								<td><c:out value="${slatable.years}" /></td>
+								<td><c:out value="${slatable.sladays}" /></td>
+								<%-- <security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+								<td><a href="EditSla?id=${slatable.id}" class="btn btn-primary btn-sm"><i
+					class="glyphicon glyphicon-edit"></i></a>
+								</td>
+								</security:authorize>
+								<security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+								<td><a href="deleteSla?id=${slatable.id}" class="btn btn-primary btn-sm"><i
+					class="glyphicon glyphicon-remove-circle"></i></a>
+								</td>
+								</security:authorize>
+ --%>							</tr> -->
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	<!-- <%-- 	<div id="users" class="tabcontent">
+			<div class="card-block" id="main">
+		<security:authorize ifAnyGranted="ROLE_SUPERADMIN">
+			<a href="addUser" class="btn btn-primary btn-sm"><i
+					class="glyphicon glyphicon-plus"></i></a>
+															</security:authorize>
+					<table id="eventsTable" data-toggle="table" 
+						data-pagination="true" data-search="true"
+						data-show-refresh="false" data-show-toggle="false"
+						data-show-columns="false" data-toolbar="#toolbar">
+						<thead>
+							<tr class="filters">
+							<th data-field="userRoleId">S.NO</th>
+							<th data-field="user">Users</th>
+							<th data-field="role">User roles</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${roles}" var="role">
+								<tr>
+								<td><c:out value="${role.userRoleId}" /></td>
+								console.log("${role.userRoleId}");
+								<td><c:out value="${role.user}" /></td>
+								<td><c:out value="${role.role}" /></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+			</div>
+			
+		</div> --%> -->
+		
+		
+			
+		</div>
+		</div>
+		</div>
+	<div class="footer">
+  <p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+</div>
+		</body>
+	
+		<script>
+//Set timeout variables.
+var timoutWarning = 60000; // Display warning in 14 Mins.
+var timoutNow = 90000; // Timeout in 15 mins.
+var logoutUrl = 'login'; // URL to logout page.
+var warningTimer;
+var timeoutTimer;
+
+//Set timeout variables.
+var timoutWarning = 60000; // Display warning in 14 Mins.
+var timoutNow = 900000; // Timeout in 15 mins.
+var logoutUrl = 'login'; // URL to logout page.
+var warningTimer;
+var timeoutTimer;
+
+// Start timers.
+function StartTimers() {
+    warningTimer = setTimeout("IdleWarning()", timoutWarning);
+    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+}
+
+// Reset timers.
+function ResetTimers() {
+    clearTimeout(warningTimer);
+    clearTimeout(timeoutTimer);
+    StartTimers();
+    $("#timeout").dialog('close');
+}
+
+// Show idle timeout warning dialog.
+function IdleWarning() {
+    $("#timeout").dialog({
+        modal: true
+    });
+}
+
+// Logout the user.
+function IdleTimeout() {
+    window.location = logoutUrl;
+}
+</script>
+</html>

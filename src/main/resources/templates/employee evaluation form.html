@@ -1,0 +1,712 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Recruitment Application</title>
+<link rel="shortcut icon"
+	href="<c:url value="/images/srinsoftlogo.png"/>" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: white ;
+</style>
+</head>
+<body onload="StartTimers(); document.forms[0].reset();" onmousemove="ResetTimers();">
+<div id="timeout">
+</div>
+	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+		</div>
+
+		<div id="navbar" class="collapse navbar-collapse">
+				<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right"> 
+			
+			
+					<li><a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
+					<li><a href="reports"><span class="glyphicon glyphicon-equalizer"></span> Reports</a></li>
+					<li><a href="candidateinfo"><span class="glyphicon glyphicon-user" data-toggle="tooltip"></span> Candidates </a></li>
+					<li><a href="require"><span class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
+					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+					<li><a><span class="glyphicon glyphicon-user"></span>  </a></li>
+					<li><a href="login"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+					<li><a><span></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+<body>
+	<div class="main-content">
+		<div class="container">
+			<h2></h2>
+			<br>
+			<!-- <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">REQUESTOR</a></li>
+    <li><a data-toggle="tab" href="#menu1">HR MANAGER</a></li>
+  </ul> -->
+
+			<div class="tab-content">
+				<div id="home" class="tab-pane fade in active">
+					<!-- <form action="saveMPRForm" method="post" data-toggle="validator"
+				role="form" onsubmit="return executeOnSubmit();" float:left> -->
+					<div class="container">
+						<h2 align="center">EMPLOYEE EVALUATION FORM(REQUESTOR)</h2>
+						<br>
+						<form action="saveformemp" method="post" role="form"
+							onsubmit="return executeOnSubmit();">
+							<div class="row">
+								<div class="col-sm-11">
+									<div class="row">
+
+										<!-- <%-- <div class="form-group">
+						<p>
+							<input type="hidden" name="id" value="${candidate.canid}"
+								readonly/>
+						</p>
+					</div>
+			 --%> -->
+										<input type="hidden" name="id" value="${evaluation.empid}"
+											readonly />
+										<!-- <div class="col-sm-3 form-group redbox">
+
+								<label class="required">EMP ID</label> <input type="text"
+									placeholder="Entercan-id here.." name="empid"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"
+									class="form-control" required><form:errors path="email" cssClass="error"/>
+							</div> -->
+										<div class="col-sm-3 form-group redbox">
+
+											<label class="required">CANDIDATE NAME</label> <span
+												class="asterisk_input"> </span> <input type="text" pattern=".*\S+.*"
+												placeholder="" name="firstName" onkeyup="if(this.textLength != 0) {clear.disabled = false} else {clear.disabled = true}"
+												class="form-control txtOnly" id="candidate" required>
+										</div>
+
+										<div class="col-sm-3 form-group redbox">
+											<label class="required">DATE OF INTERVIEW</label> <span
+									class="asterisk_input"> </span> <input id="meeting" type="date"
+									placeholder="" name="interviewDate" 
+									class="form-control" required>
+											 <!-- <input
+												type="text" name="interviewDate"
+												placeholder="Enter the date of the interview"
+												class="form-control" required> -->
+										</div>
+										<div class="col-sm-3 form-group redbox">
+											<label class="required">POSITION NAME</label> <input
+												type="text" name="positionName" pattern=".*\S+.*"
+												placeholder="" class="form-control txtOnly"
+												required>
+										</div>
+										<div class="col-sm-3 form-group bluebox">
+											<label class="required">TOTAL EXPERIENCE</label><input
+												type="" name="experience"
+												placeholder=""
+												class="form-control" required>
+										</div>
+									</div>
+									<div class="row">
+										
+										<div class="col-sm-3 form-group">
+											<label class="required">TECHNICAL PANEL ROUND 1 </label> <input
+												type="text" name="technicalPanel1" pattern=".*\S+.*" 
+												placeholder="" class="form-control txtOnly" required>
+										</div>
+										<div class="col-sm-3 form-group">
+											<label class="">TECHNICAL PANEL ROUND 2 </label> <input
+												type="text" name="technicalPanel2" pattern=".*\S+.*"
+												placeholder=""class="form-control txtOnly">
+										</div>
+										<div class="col-sm-3 form-group">
+											<label class="required">MODE OF INTERVIEW</label> <input
+												type="text" name="modeOf" pattern=".*\S+.*"
+												placeholder="" class="form-control txtOnly" required>
+										</div>
+									</div>
+
+									<br>
+									<div class="row" style="width: 55%;margin-right: -30%;">
+										<div class="form-group col-sm-14">
+											<table id="mainTable1" border='1'
+												class="table table-bordered"
+												style="border-color: white; float: left;">
+												<tr>
+													<th colspan="3">TECHNICAL LEVEL</th>
+												</tr>
+												<tr>
+													<th colspan="">TECHNICAL/JOB RELATED</th>
+													<th colspan="" class="required">ROUND 1</th>
+													<th colspan="">ROUND 2</th>
+												</tr>
+												<tr>
+													<td class="required">CONCEPT</td>
+													<td><select name="qty" id="qty1" onblur="findTotal()"
+														name="conceptOne" class="form-control" required>
+															<option value="">--Select--</option>
+															<option value="1" onblur="findTotal()">1 - BELOW SATISFACTORY</option>
+															<option value="2" onblur="findTotal()">2 - SATISFACTORY</option>
+															<option value="3" onblur="findTotal()">3 - GOOD</option>
+															<option value="4" onblur="findTotal()">4 - VERY GOOD</option>
+															<option value="5" onblur="findTotal()">5 - EXCELLENT</option>
+													</select></td>
+													<td><select name="qtyy" id="qtyy1"
+														onblur="findTotal1()" name="conceptTwo"
+														class="form-control">
+															<option value="">--Select--</option>
+															<option value="1">1 - BELOW SATISFACTORY</option>
+															<option value="2">2 - SATISFACTORY</option>
+															<option value="3">3 - GOOD</option>
+															<option value="4">4 - VERY GOOD</option>
+															<option value="5">5 - EXCELLENT</option>
+													</select></td>
+												</tr>
+												<tr>
+													<td class="required">TECHNICAL</td>
+													<td><select name="qty" id="qty2" onblur="findTotal()"
+														name="technicalOne" class="form-control" required>
+															<option value="">--Select--</option>
+															<option value="1" onblur="findTotal()">1 - BELOW SATISFACTORY</option>
+															<option value="2" onblur="findTotal()">2 - SATISFACTORY</option>
+															<option value="3" onblur="findTotal()">3 - GOOD</option>
+															<option value="4" onblur="findTotal()"> 4 - VERY GOOD</option>
+															<option value="5" onblur="findTotal()">5 - EXCELLENT</option>
+													</select></td>
+													<td><select name="qtyy" id="qtyy2"
+														onblur="findTotal1()" name="technicalTwo"
+														class="form-control">
+															<option value="">--Select--</option>
+															<option value="1">1 - BELOW SATISFACTORY</option>
+															<option value="2">2 - SATISFACTORY</option>
+															<option value="3">3 - GOOD</option>
+															<option value="4">4 - VERY GOOD</option>
+															<option value="5">5 - EXCELLENT</option>
+													</select></td>
+												</tr>
+												<tr>
+													<td class="required">ANALYTICAL SKILLS</td>
+													<td><select name="qty" id="qty3" onblur="findTotal()"
+														name="analayticalOne" class="form-control" required>
+															<option value="">--Select--</option>
+															<option value="1" onblur="findTotal()">1 - BELOW SATISFACTORY</option>
+															<option value="2" onblur="findTotal()">2 - SATISFACTORY</option>
+															<option value="3" onblur="findTotal()">3 - GOOD</option>
+															<option value="4" onblur="findTotal()">4 - VERY GOOD</option>
+															<option value="5" onblur="findTotal()">5 - EXCELLENT</option>
+													</select></td>
+													<td><select name="qtyy" id="qtyy3"
+														onblur="findTotal1()" name="analayticalTwo"
+														class="form-control">
+															<option value="">--Select--</option>
+															<option value="1">1 - BELOW SATISFACTORY</option>
+															<option value="2">2 - SATISFACTORY</option>
+															<option value="3">3 - GOOD</option>
+															<option value="4">4 - VERY GOOD</option>
+															<option value="5">5 - EXCELLENT</option>
+													</select></td>
+												</tr>
+												<tr>
+													<td class="required">PROBLEM SOLVING SKILLS</td>
+													<td><select name="qty" id="qty4" onblur="findTotal()"
+														name="problemOne" class="form-control" required>
+															<option value="">--Select--</option>
+															<option value="1" onblur="findTotal()">1 - BELOW SATISFACTORY</option>
+															<option value="2" onblur="findTotal()">2 - SATISFACTORY</option>
+															<option value="3" onblur="findTotal()">3 - GOOD</option>
+															<option value="4" onblur="findTotal()">4 - VERY GOOD</option>
+															<option value="5" onblur="findTotal()">5 - EXCELLENT</option>
+													</select></td>
+													<td><select name="qtyy" id="qtyy4"
+														onblur="findTotal1()" name="problemTwo"
+														class="form-control">
+															<option value="">--Select--</option>
+															<option value="1">1 - BELOW SATISFACTORY</option>
+															<option value="2">2 - SATISFACTORY</option>
+															<option value="3">3 - GOOD</option>
+															<option value="4">4 - VERY GOOD</option>
+															<option value="5">5 - EXCELLENT</option>
+													</select></td>
+
+												</tr>
+
+												<tr>
+													<td><b>OVERALL RATINGS</b></td>
+													<td><input type="text" name="overallOne" id="total"
+														class="form-control" readonly></td>
+													<td><input type="text" name="overallTwo" id="total1"
+														class="form-control" readonly></td>
+												</tr>
+												<tr>
+													<td class="required"><b>TECHNICAL PANEL COMMENTS</b></td>
+													<td><input type="text"  style="height:60px;"placeholder="" pattern=".*\S+.*"
+															rows="3" required name="hrcomments1" class="form-control"></td>
+													<td><input type="text" style="height:60px;" placeholder="" pattern=".*\S+.*"
+															rows="3" name="hrcomments2" class="form-control"></td>
+												</tr>
+											</table>
+											<!-- <div class="row">
+							<div class="col-sm-6 form-group redbox">
+								<label class="required">INTERVIEW ASSESSMENT</label> 
+								<div class="">
+								<ol>
+  									<li>BELOW SATISFACTORY</li>
+  									<li>SATISFACTORY</li>
+  									<li>GOOD</li>
+  									<li>VERY GOOD</li>
+  									<li>EXCELLENT</li>
+								</ol> 
+						</div>
+							</div>
+						</div> -->
+										</div>
+										<!-- 		<label>MPR RECIEVED DATE :</label>				
+ -->
+									</div>
+									<div class="col-sm-3 form-group ">
+										<label class="required">TECHNICAL INTERVIEW STATUS </label><br>
+										<select size="1"
+											name="technicalInterviewStatus" required class="form-control">
+												<option value="">--SELECT--</option>
+												<option value="selected">SELECTED</option>
+												<option value="rejected">REJECTED</option>
+												<option value="waitlist">WAIT LISTED</option>
+										</select>
+									</div>
+									<div class="col-sm-11 text-center">
+										<button type="submit" class="btn btn-default">SAVE</button>
+										<button class="btn btn-default" name="clear" onClick="return confirm('Are you sure you want to clear?')" type="reset" disabled="disabled">CLEAR</button>
+
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<br>
+				<div id="menu1" class="tab-pane fade">
+					<br>
+					<div class="container">
+						<!-- <form action="saveMPRForm" method="post" data-toggle="validator"
+				role="form" onsubmit="return executeOnSubmit();" float:left> -->
+						<h2 align="center">EMPLOYEE EVALUATION FORM(HR MANAGER)</h2>
+						<br>
+						<form action="saveformemp" method="post" role="form"
+							onsubmit="return executeOnSubmit();">
+
+
+
+							<div class="col-sm-3 form-group redbox">
+
+								<label class="required">EMP ID</label> <input type="text"
+									placeholder="Entercan-id here.." name="empid"
+									onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"
+									class="form-control" required>
+								<form:errors path="email" cssClass="error" />
+							</div>
+							<div class="row">
+								<!-- <div class="col-sm-3 form-group redbox">
+
+								<label class="required">CAN ID</label> <input type="text"
+									placeholder="Entercan-id here.." name="canid"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"
+									class="form-control" required><form:errors path="email" cssClass="error"/>
+							</div> -->
+
+
+								<div class="col-sm-3 form-group bluebox">
+									<label class="required">CURRENT EMPLOYER </label> <input
+										type="text" name="previousCompany"
+										placeholder=" "
+										class="form-control" required>
+								</div>
+								<div class="col-sm-3 form-group redbox">
+									<label class="required">CURRENT DESIGNATION </label> <input
+										type="text" name="currentJobTitle"
+										placeholder=""
+										class="form-control" required>
+								</div>
+								<div class="col-sm-3 form-group bluebox">
+									<label class="required">CURRENT/LAST CTC </label> <input
+										type="text" name="previousCtc"
+										placeholder="" class="form-control"
+										title="Please enter only numbers.." required>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-3 form-group redbox">
+									<label class="required">EXPECTED CTC </label> <input
+										type="text" name="expectedCtc"
+										placeholder="" class="form-control"
+										title="Enter Expected CTC" required>
+								</div>
+
+
+
+								<div class="col-sm-3 form-group redbox">
+									<label class="required">NOTICE PERIOD: (in months) </label> <input
+										type="text" name="noticePeriod"
+										placeholder=""class="form-control"
+										title="Please enter only numbers.." required>
+								</div>
+								<div class="col-sm-3 form-group bluebox">
+									<label class="required">BUYOUT</label> <select
+										name="buyOutOption" class="form-control">
+										<option>--Select--</option>
+										<option value="yes">YES</option>
+										<option value="no">NO</option>
+
+									</select>
+								</div>
+								<div class="col-sm-3 form-group">
+									<div></div>
+									<label class="required">HR PANEL ROUND1 </label> <input
+										type="text" name="interviewPanel3" required
+										placeholder="" class="form-control"
+										title="">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 form-group">
+									<label class="">HR PANEL ROUND 2</label> <input type="text"
+										name="interviewPanel4" placeholder=""
+										class="form-control" title="">
+								</div>
+
+								<div class="col-sm-3 form-group bluebox">
+									<label>REFERRED BY </label> <input type="text"
+										name="referredBy" placeholder=""
+										class="form-control">
+								</div>
+
+							</div>
+
+							<div class="row">
+								<div class="form-group col-sm-14">
+
+									<table id="mainTable1" border='1' class="table table-bordered"
+										style="border-color: white; float: left; width: 45%">
+										<tr>
+											<th colspan="3">PERSONAL LEVEL ATTRIBUTES</th>
+										</tr>
+										<tr>
+											<th colspan="">PERSONALITY ATTRIBUTES</th>
+											<th colspan="" class="required">ROUND 1</th>
+											<th colspan="">ROUND 2</th>
+										</tr>
+										<tr>
+											<td class="required">COMMUNICATION</td>
+											<td><select name="qtyyy" id="qtyyy1"
+												name="communicationOne" onblur="findTotal2()"
+												class="form-control" required>
+													<option value="">--Select--</option>
+													<option value="1">1 - BELOW SATISFACTORY</option>
+													<option value="2">2 - SATISFACTORY</option>
+													<option value="3">3 - GOOD</option>
+													<option value="4">4 - VERY GOOD</option>
+													<option value="5">5 - EXCELLENT</option>
+											</select></td>
+											<td><select name="qtyyyy" id="qtyyyy1"
+												onblur="findTotal3()" name="communicationTwo"
+												class="form-control">
+													<option value="">--Select--</option>
+													<option value="1">1 - BELOW SATISFACTORY</option>
+													<option value="2">2 - SATISFACTORY</option>
+													<option value="3">3 - GOOD</option>
+													<option value="4">4 - VERY GOOD</option>
+													<option value="5">5 - EXCELLENT</option>
+											</select></td>
+										</tr>
+										<tr>
+											<td class="required">APTITIUDE</td>
+											<td><select name="qtyyy" id="qtyyy2"
+												onblur="findTotal2()" name="aptitudeOne"
+												class="form-control" required>
+													<option value="">--Select--</option>
+													<option value="1">1 - BELOW SATISFACTORY</option>
+													<option value="2">2 - SATISFACTORY</option>
+													<option value="3">3 - GOOD</option>
+													<option value="4">4 - VERY GOOD</option>
+													<option value="5">5 - EXCELLENT</option>
+											</select></td>
+											<td><select name="qtyyyy" id="qtyyyy2"
+												onblur="findTotal3()" name="aptitudeTwo"
+												class="form-control">
+													<option value="">--Select--</option>
+													<option value="1">1 - BELOW SATISFACTORY</option>
+													<option value="2">2 - SATISFACTORY</option>
+													<option value="3">3 - GOOD</option>
+													<option value="4">4 - VERY GOOD</option>
+													<option value="5">5 - EXCELLENT</option>
+											</select></td>
+										</tr>
+										<tr>
+											<td class="required">LEADERSHIP</td>
+											<td><select name="qtyyy" id="qtyyy3"
+												onblur="findTotal2()" name="leaderOne" class="form-control"
+												required>
+													<option value="">--Select--</option>
+													<option value="1">1 - BELOW SATISFACTORY</option>
+													<option value="2">2 - SATISFACTORY</option>
+													<option value="3">3 - GOOD</option>
+													<option value="4">4 - VERY GOOD</option>
+													<option value="5">5 - EXCELLENT</option>
+											</select></td>
+											<td><select name="qtyyyy" id="qtyyyy3"
+												onblur="findTotal3()" name="leaderTwo" class="form-control">
+													<option value="">--Select--</option>
+													<option value="1">1 - BELOW SATISFACTORY</option>
+													<option value="2">2 - SATISFACTORY</option>
+													<option value="3">3 - GOOD</option>
+													<option value="4">4 - VERY GOOD</option>
+													<option value="5">5 - EXCELLENT</option>
+											</select></td>
+										</tr>
+										<tr>
+											<td class="required">INITIATIVE</td>
+											<td><select name="qtyyy" id="qtyyy4"
+												onblur="findTotal2()" name="initiativeOne"
+												class="form-control" required>
+													<option value="">--Select--</option>
+													<option value="1">1 - BELOW SATISFACTORY</option>
+													<option value="2">2 - SATISFACTORY</option>
+													<option value="3">3 - GOOD</option>
+													<option value="4">4 - VERY GOOD</option>
+													<option value="5">5 - EXCELLENT</option>
+											</select></td>
+											<td><select name="qtyyyy" id="qtyyyy4"
+												onblur="findTotal3()" name="initiativeTwo"
+												class="form-control">
+													<option value="">--Select--</option>
+													<option value="1">1 - BELOW SATISFACTORY</option>
+													<option value="2">2 - SATISFACTORY</option>
+													<option value="3">3 - GOOD</option>
+													<option value="4">4 - VERY GOOD</option>
+													<option value="5">5 - EXCELLENT</option>
+											</select></td>
+										</tr>
+										<tr>
+											<td class="required">WILLINGNESS TO LEARN</td>
+											<td><select name="qtyyy" id="qtyyy5"
+												onblur="findTotal2()" name="willlearnOne"
+												class="form-control" required>
+													<option value="">--Select--</option>
+													<option value="1">1 - BELOW SATISFACTORY</option>
+													<option value="2">2 - SATISFACTORY</option>
+													<option value="3">3 - GOOD</option>
+													<option value="4">4 - VERY GOOD</option>
+													<option value="5">5 - EXCELLENT</option>
+											</select></td>
+											<td><select name="qtyyyy" id="qtyyyy5"
+												onblur="findTotal3()" name="willlearnTwo"
+												class="form-control">
+													<option value="">--Select--</option>
+													<option value="1">1 - BELOW SATISFACTORY</option>
+													<option value="2">2 - SATISFACTORY</option>
+													<option value="3">3 - GOOD</option>
+													<option value="4">4 - VERY GOOD</option>
+													<option value="5">5 - EXCELLENT</option>
+											</select></td>
+										</tr>
+
+										<!-- <tr>
+									<td>Others</td>
+									<td><input type="text" name="othersFive"
+										class="form-control"></td>
+									<td><input type="text" name="othersSix"
+										class="form-control"></td>
+								</tr> -->
+										<tr>
+											<td class="required"><b>OVERALL RATINGS</b></td>
+											<td><input type="text" name="overallThree" id="total2"
+												required="required" onblur="findTotal2()"
+												class="form-control"></td>
+											<td><input type="text" name="overallFour" id="total3"
+												onblur="findTotal3()" class="form-control"></td>
+										</tr>
+										<tr>
+											<td class="required"><b>HR PANEL COMMENTS</b></td>
+											<td><textarea placeholder="" rows="3"
+													required name="hrcomments1" class="form-control"></textarea></td>
+											<td><textarea placeholder="" rows="3"
+													name="hrcomments2" class="form-control"></textarea></td>
+										</tr>
+
+									</table>
+									<!-- 	<div class="row">
+							<div class="col-sm-6 form-group redbox">
+								<label class="required">INTERVIEW ASSESSMENT</label> 
+								<div class="">
+								<ol>
+  									<li>BELOW SATISFACTORY</li>
+  									<li>SATISFACTORY</li>
+  									<li>GOOD</li>
+  									<li>VERY GOOD</li>
+  									<li>EXCELLENT</li>
+								</ol> 
+						</div>
+							</div>
+						</div> -->
+								</div>
+							</div>
+							<div class="col-sm-3 form-group">
+
+								<label class="required">HR INTERVIEW STATUS</label><br> <label
+									class=""> <select size="1" required
+									class="form-control" name="hrInterviewStatus">
+										<option value="">--SELECT--</option>
+										<option value="selected">SELECTED</option>
+										<option value="rejected">REJECTED</option>
+										<option value="waitlist">WAIT LISTED</option>
+								</select>
+								</label>
+							</div>
+
+							<input type="hidden" name="id" value=""
+								readonly /> <input type="hidden" name="firstName"
+								value="" readonly> <input
+								type="hidden" name="interviewDate"
+								value="" readonly> <input
+								type="hidden" name="positionName"
+								placeholder="Enter the position Name"
+								value="" class="form-control" readonly>
+							<input type="hidden" name="experience"
+								placeholder="Enter the total experience..." class="form-control"
+								value="" readonly> <input
+								type="hidden" name="technicalPanel1"
+								value=""
+								placeholder="Enter Interviewer Name" class="form-control"
+								readonly> <input type="hidden" name="technicalPanel2"
+								value=""
+								placeholder="Enter Interviewer Name" class="form-control"
+								readonly> <input type="hidden" name="qty" id="qty1"
+								onblur="findTotal()" name="conceptOne"
+								value="${evaluation.conceptOne}" class="form-control" readonly>
+							<input type="hidden" name="qtyy" id="qtyy1" onblur="findTotal1()"
+								name="conceptTwo" value="${evaluation.conceptTwo}"
+								class="form-control" readonly> <input type="hidden"
+								name="qty" id="qty2" onblur="findTotal()" name="technicalOne"
+								value="${evaluation.technicalOne}" class="form-control" readonly>
+							<input type="hidden" name="qtyy" id="qtyy2" onblur="findTotal1()"
+								name="technicalTwo" value="${evaluation.technicalTwo}"
+								class="form-control" readonly> <input type="hidden"
+								name="qty" id="qty3" onblur="findTotal()" name="analayticalOne"
+								value="${evaluation.analayticalOne}" class="form-control"
+								readonly> <input type="hidden" name="qtyy" id="qtyy3"
+								onblur="findTotal1()" name="analayticalTwo"
+								value="${evaluation.analayticalTwo}" class="form-control"
+								readonly> <input type="hidden" name="qty" id="qty4"
+								onblur="findTotal()" name="problemOne"
+								value="${evaluation.problemOne}" class="form-control" readonly>
+							<input type="hidden" name="qtyy" id="qtyy4" onblur="findTotal1()"
+								name="problemTwo" value="${evaluation.problemTwo}"
+								class="form-control" readonly> <input type="hidden"
+								name="overallOne" id="total" value="${evaluation.overallOne}"
+								class="form-control" readonly> <input type="hidden"
+								name="overallTwo" id="total1" value="${evaluation.overallTwo}"
+								class="form-control" readonly> <input type="hidden"
+								placeholder="Enter Technical Comments"
+								value="${evaluation.hrcomments1}" name="hrcomments1"
+								class="form-control" readonly> <input type="hidden"
+								placeholder="Enter Technical Comments"
+								value="${evaluation.hrcomments2}" name="hrcomments2"
+								class="form-control" readonly> <input type="hidden"
+								name="technicalInterviewStatus" readonly
+								value="${evaluation.technicalInterviewStatus}"
+								class="form-control">
+							<div class="col-sm-11 text-center">
+								<button type="submit" class="btn btn-default">SAVE</button>
+								<button class="btn btn-default" type="reset">CLEAR</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		<div class="footer">
+  <p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+</div>
+		</div>
+		</div>
+</body>
+<script>
+
+function myFunction(){
+	 var x=document.getElementById("mprApprover").value;
+	 document.getElementById("picked").value=x;
+	 console.log(x);
+}
+
+</script>
+
+<script>
+//Set timeout variables.
+var timoutWarning = 60000; // Display warning in 14 Mins.
+var timoutNow = 900000; // Timeout in 15 mins.
+var logoutUrl = 'login'; // URL to logout page.
+var warningTimer;
+var timeoutTimer;
+
+// Start timers.
+function StartTimers() {
+    warningTimer = setTimeout("IdleWarning()", timoutWarning);
+    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+}
+
+// Reset timers.
+function ResetTimers() {
+    clearTimeout(warningTimer);
+    clearTimeout(timeoutTimer);
+    StartTimers();
+    $("#timeout").dialog('close');
+}
+
+$('.txtOnly').keypress(function (e) {
+	var regex = new RegExp("^[a-zA-Z]+$");
+	var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+	if (regex.test(str)) {
+		return true;
+	}
+	else
+	{
+	e.preventDefault();
+	$('.error').show();
+	$('.error').text('Please Enter Alphabate');
+	return false;
+	}
+});
+
+// Show idle timeout warning dialog.
+function IdleWarning() {
+    $("#timeout").dialog({
+        modal: true
+    });
+}
+
+// Logout the user.
+function IdleTimeout() {
+    window.location = logoutUrl;
+}
+</script>
+</html>

@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Talent Acquisition Portal</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"></script>
+<script
+	src="http://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
+<script
+	src="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.js"></script>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="css/main.css" type="text/css" />
+<style>
+@import "font-awesome.min.css";
+
+@import "font-awesome-ie7.min.css";
+/* Space out content a bit */
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header, .marketing, .footer {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+/* Custom page header */
+.header {
+	border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+	padding-bottom: 19px;
+	margin-top: 0;
+	margin-bottom: 0;
+	line-height: 40px;
+}
+
+/* Custom page footer */
+.footer {
+	padding-top: 19px;
+	color: #777;
+	border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media ( min-width : 768px) {
+	.container {
+		max-width: 1300px;
+	}
+}
+
+.container-narrow>hr {
+	margin: 70px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.jumbotron .btn {
+	padding: 14px 24px;
+	font-size: 21px;
+}
+
+/* Supporting marketing content */
+.marketing {
+	margin: 40px 0;
+}
+
+.marketing p+h4 {
+	margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+	/* Remove the padding we set earlier */
+	.header, .marketing, .footer {
+		padding-right: 0;
+		padding-left: 0;
+	}
+	/* Space out the masthead */
+	.header {
+		margin-bottom: 30px;
+	}
+	/* Remove the bottom border on the jumbotron for visual effect */
+	.jumbotron {
+		border-bottom: 0;
+	}
+}
+
+.hai {
+	float: right;
+}
+
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+</style>
+
+</head>
+<body onload="StartTimers(); document.forms[0].reset();" onmousemove="ResetTimers();">
+<div id="timeout">
+</div>
+	<nav class="navbar navbar-default navbar-fixed-top">
+
+		<div class="navbar-header">
+
+			<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right"> 
+
+		</div>
+		<br> <br>
+
+	</nav>
+	<br>
+	<br>
+	<br>
+	<br>
+
+<form action="resaveform" path="content" method="post"
+		data-toggle="validator" role="form">
+		<div class="container">
+				<h4 class="well">Employee Evaluation Form</h4>
+
+
+			<div class="col-lg-12 well">
+				<div class="row">
+					<div class="hai">
+						<input type="submit" class=" btn btn-lg btn-danger"
+							value="save">
+					</div>
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								<label>DATE OF INTERVIEW:</label> <input type="date"
+									name="dateOfInterview" value=""
+									placeholder=""
+									class="form-control"  title="date" >
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>REFERRED BY:</label> <input type="text"
+									name="nameOfReference" placeholder=""
+									class="form-control" value="">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								<label>NAME OF THE CANDIDATE:</label> <input type="text"
+									name="candidateName" placeholder=""
+									class="form-control" value="" title="name">
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>CURRENT/LAST EMPLOYER:</label> <input type="text"
+									name="previousCompany" value="" placeholder=""
+									class="form-control" >
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								<label>CURRENT/LAST DESIGNATION:</label> <input type="text"
+									name="candidateDesignation" value=""
+									placeholder=""
+									class="form-control" >
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>CURRENT/LAST CTC:</label> <input type="text"
+									name="previousCtc" placeholder="" value=""
+									class="form-control" title="Please enter only numbers.."
+									>
+							</div>
+							<div class="row">
+								<div class="col-sm-6 form-group">
+									<label>EXPECTED CTC:</label> <input type="text"
+										name="expectedCtc" placeholder="" class="form-control" value=""
+										 title="Enter Expected CTC" >
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>TOTAL & RELEVANT EXP:</label> <input type="text"
+										name="candidateExperience"
+										placeholder="" class="form-control" value=""
+										>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6 form-group">
+									<label>NOTICE PERIOD:</label> <input type="text"
+										name="noticePeriod" placeholder="" value=""
+										class="form-control" 
+										title="Please enter only numbers.." >
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>BUYOUT: (YES/NO)</label> <input type="text"
+										name="buyOutOption" placeholder="" value=""
+										class="form-control" >
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6 form-group">
+									<label>INTERVIEW ASSESSMENT:</label>
+								</div>
+							</div>
+							<div class="row">
+							<input type="text" name="interviewAssessment" id="jobOpening" value="" class="form-control"/> 
+								<div class="col-sm-6 form-group">
+									<label>1.Below Satisfactory 2.Satisfactory 3.Good
+										4.Very Good 5.Excellent</label><br> <br>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<table id="mainTable1" border='1' class="table table-bordered"
+									style="border-color: white; float: left; width: 45%">
+									<tr>
+										<th colspan="3">TECHNICAL LEVEL</th>
+									</tr>
+									<tr>
+										<th colspan="">Technical/Job Related</th>
+										<th colspan="">Round 1</th>
+										<th colspan="">Round 2</th>
+									</tr>
+									<tr>
+										<td>Concept</td>
+										<td><input onblur="findTotal()" type="text"  value="" name="conceptOne"
+											id="qty1" class="form-control"></td>
+										<td><input onblur="findTotal1()" type="text" value="" name="conceptTwo"
+											id="quty1" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Technical</td>
+										<td><input onblur="findTotal()" type="text" value="" name="technicalOne"
+											id="qty2" class="form-control"></td>
+										<td><input onblur="findTotal1()" type="text" value="" name="technicalTwo"
+											id="quty2" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Analytical Skills</td>
+										<td><input onblur="findTotal()" type="text" value=""
+											name="analayticalOne" id="qty5" class="form-control"></td>
+										<td><input onblur="findTotal1()" type="text" value=""
+											name="analayticalTwo" id="quty5" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Problem Solving Skills</td>
+										<td><input onblur="findTotal()" type="text" value=""
+											name="problemOne" id="qty6" class="form-control"></td>
+										<td><input onblur="findTotal1()" type="text" value=""
+											name="problemTwo" id="quty6"
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Others</td>
+										<td><input onblur="findTotal()" type="text" value=""
+											name="othersOne" id="qty7" class="form-control"></td>
+										<td><input onblur="findTotal1()" type="text" value=""
+											name="othersTwo" id="quty7" class="form-control"></td>
+									</tr>
+									<tr>
+										<td><b>Overall ratings</b></td>
+										<td><input onblur="findTotal()" type="text" value=""
+											name="overallOne" id="total" class="form-control"></td>
+										<td><input onblur="findTotal1()" type="text" value=""
+											name="overallTwo" id="total1" class="form-control"></td>
+									</tr>
+								</table>
+								<table id="mainTable1" border='1' class="table table-bordered"
+									style="border-color: white; float: left; width: 45%">
+									<tr>
+										<th colspan="3">PERSONAL LEVEL ATTRIBUTES</th>
+									</tr>
+									<tr>
+										<th colspan="">Personality Attributes</th>
+										<th colspan="">Round 1</th>
+										<th colspan="">Round 2</th>
+									</tr>
+									<tr>
+										<td>Communication</td>
+										<td><input type="text" name="communicationOne" value=""
+											class="form-control"></td>
+										<td><input type="text" name="communicationTwo"  value=""
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Aptitude</td>
+										<td><input type="text" name="aptitudeOne" value=""
+											class="form-control"></td>
+										<td><input type="text" name="aptitudeTwo" value=""
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>LeaderShip</td>
+										<td><input type="text" name="leaderOne" value=""
+											class="form-control"></td> 
+										<td><input type="text" name="leaderTwo" value=""
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Initiative</td>
+										<td><input type="text" name="initiativeOne" value=""
+											class="form-control"></td>
+										<td><input type="text" name="initiativeTwo" value=""
+											class="form-control"></td> 
+									</tr>
+									<tr>
+										<td>Willingness To Learn</td>
+										<td><input type="text" name="willlearnOne" value=""
+											class="form-control"></td>
+										<td><input type="text" name="willlearnTwo" value=""
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Others</td>
+										<td><input type="text" name="othersThree" value=""
+											class="form-control"></td>
+										<td><input type="text" name="othersFour" value=""
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Others</td>
+										<td><input type="text" name="othersFive" value=""
+											class="form-control"></td>
+										<td><input type="text" name="othersSix" value=""
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td><b>Overall ratings</b></td>
+										<td><input type="text" name="overallThree" value=""
+											class="form-control"></td>
+										<td><input type="text" name="overallFour" value=""
+											class="form-control"></td>
+									</tr>
+
+								</table>
+							</div>
+							<div class="form-group row">
+								<!-- <label>HUMAN RESOURCE COMMENTS:</label><br> <br> -->
+										<!-- <label>MPR RECIEVED DATE :</label>				 -->
+
+								<label>HUMAN RESOURCE COMMENTS :</label>
+								 <label>
+									class="container"> <select size="1" value="" name="hrcomments">
+									
+										<option value="selected">SELECTED</option>
+										<option value="rejected">REJECTED</option>
+										<option value="waitlist">WAIT-LISTED</option>
+								</select>
+								</label>
+
+								<div class="row">
+									<br>
+									<div class="col-sm-6 form-group">
+										<label>Interview Panel  Round 1:</label> <input
+											type="text" name="interviewPanel1" value=""
+											placeholder="Enter Interviewer Name" class="form-control"
+										 title="">
+									</div>
+									<div class="col-sm-6 form-group">
+										<label>Interview Panel  Round 2:</label> <input
+											type="text" name="interviewPanel2" value=""
+											placeholder="Enter Interviewer Name" class="form-control"
+											 title="">
+									</div>
+								</div>
+
+							</div>
+							<div class="form-group row">
+								<br> <label>TECHNICAL REMARKS :</label><br> <label class="container"> <select
+									size="1" name="technicalRemarks" value=""> <br>
+										<option value="selected">SELECTED</option>
+										<option value="rejected">REJECTED</option>
+										<option value="waitlist">WAIT-LISTED</option>
+								</select>
+								</label> <br>
+								<div class="row">
+									<div class="col-sm-6 form-group">
+										<div></div>
+										<label>Interview Panel Round 1:</label> <input
+											type="text" name="interviewPanel3"
+											placeholder="Enter Interviewer Name" value="" class="form-control"
+											title="">
+									</div>
+									<div class="col-sm-6 form-group">
+										<label>Interview Panel Round 2:</label> <input
+											type="text" name="interviewPanel4"
+											placeholder="Enter Interviewer Name" value="" class="form-control"
+											 title="">
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+	</form>
+	<div class="footer">
+  <p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+</div>
+	<script type="text/javascript">
+		$(function() {
+			$("#chkPassport").click(function() {
+				if ($(this).is(":checked")) {
+					$("#dvPassport").show();
+				} else {
+					$("#dvPassport").hide();
+				}
+			});
+		});
+
+		function executeOnSubmit() {
+			var res = confirm("Thank You! Your mail has been successfully sent ");
+			if (res)
+				return true;
+			else
+				return false;
+		}
+
+/* 		function findTotal() {
+			var arr = document.getElementsByName('qty');
+			var tot = 0;
+			for (var i = 0; i < arr.length; i++) {
+				if (parseInt(arr[i].value))
+					tot += parseInt(arr[i].value);
+			}
+			document.getElementById('total').value = tot;
+		}
+
+		function findTotal1() {
+			var arr = document.getElementsByName('quty');
+			var tot = 0;
+			for (var i = 0; i < arr.length; i++) {
+				if (parseInt(arr[i].value))
+					tot += parseInt(arr[i].value);
+			}
+			document.getElementById('total1').value = tot;
+		} */
+		
+	</script>
+
+</body>
+<script>
+//Set timeout variables.
+var timoutWarning = 60000; // Display warning in 14 Mins.
+var timoutNow = 900000; // Timeout in 15 mins.
+var logoutUrl = 'login'; // URL to logout page.
+var warningTimer;
+var timeoutTimer;
+
+// Start timers.
+function StartTimers() {
+    warningTimer = setTimeout("IdleWarning()", timoutWarning);
+    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+}
+
+// Reset timers.
+function ResetTimers() {
+    clearTimeout(warningTimer);
+    clearTimeout(timeoutTimer);
+    StartTimers();
+    $("#timeout").dialog('close');
+}
+
+// Show idle timeout warning dialog.
+function IdleWarning() {
+    $("#timeout").dialog({
+        modal: true
+    });
+}
+
+// Logout the user.
+function IdleTimeout() {
+    window.location = logoutUrl;
+}
+</script>
+</html>

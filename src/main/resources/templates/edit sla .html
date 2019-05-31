@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<title>Talent Acquisition Portal</title>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript"
+	src="<c:url value="/scripts/export.js"/>"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: white ;
+</style>
+
+</head>
+<body onload="StartTimers(); document.forms[0].reset();" onmousemove="ResetTimers();">
+	<div id="timeout"></div>
+	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+		</div>
+
+		<div id="navbar" class="collapse navbar-collapse">
+			<div class="topnav">
+				<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right">
+				
+					<li><a href="dashboard"><span
+							class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
+					<li><a href="reports"><span
+							class="glyphicon glyphicon-equalizer"></span>Reports</a></li>
+					<li><a href="candidateinfo"><span
+							class="glyphicon glyphicon-user" data-toggle="tooltip"></span>
+							Candidates </a></li>
+					<li><a href="require"><span
+							class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
+					
+					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+					
+					<li><a><span class="glyphicon glyphicon-user"></span>
+							 </a></li>
+					<li><a href="login"><span
+							class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+					<li><a><span></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="main-content">
+		<div id="main" class="col-sm-12">
+			<br>
+			<div class="container">
+				<br> <br>
+				<h1 align="center">UPDATE SLA</h1>
+				<div class="row">
+					<form action="resave8" class="col-md-12 go-right" method="post"
+						data-toggle="validator" role="form"
+						onsubmit="return executeOnSubmit();">
+						<p>
+							<input type="hidden" name="id" value="${table.id}"
+								readonly="true" />
+						</p>
+						<div class="row">
+							<div class="col-sm-4 form-group">
+								<label for="">EXPERIENCE LEVEL</label> <input id=""
+									name="experiencelevel" type="tel"
+									value="" class="form-control" required>
+							</div>
+							<div class="col-sm-4 form-group">
+								<label for="">YEARS</label> <input id="" name="years" type="tel"
+									value="" class="form-control" required>
+							</div>
+							<div class="col-sm-4 form-group">
+								<label for="">SLA DAYS</label> <input id="" name="sladays"
+									type="tel" value="" class="form-control"
+									required>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12 text-center">
+								<button type="submit" class="btn btn-default">SAVE</button>
+						<button class="btn btn-default" onClick="return confirm('Are you absolutely sure you want to delete?')" type="reset">CLEAR</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+	</div>
+</body>
+
+
+<script>
+//Set timeout variables.
+var timoutWarning = 60000; // Display warning in 14 Mins.
+var timoutNow = 900000; // Timeout in 15 mins.
+var logoutUrl = 'login'; // URL to logout page.
+var warningTimer;
+var timeoutTimer;
+
+// Start timers.
+function StartTimers() {
+    warningTimer = setTimeout("IdleWarning()", timoutWarning);
+    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+}
+
+// Reset timers.
+function ResetTimers() {
+    clearTimeout(warningTimer);
+    clearTimeout(timeoutTimer);
+    StartTimers();
+    $("#timeout").dialog('close');
+}
+
+// Show idle timeout warning dialog.
+function IdleWarning() {
+    $("#timeout").dialog({
+        modal: true
+    });
+}
+
+// Logout the user.
+function IdleTimeout() {
+    window.location = logoutUrl;
+}
+
+	function executeOnSubmit() {
+
+		var res = confirm("You updated the SLA credentials successfully!");
+
+		if (res)
+			return true;
+		else
+			return false;
+	}
+</script>
+</html>

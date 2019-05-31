@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html>
+<title>Talent Acquisition Portal</title>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript"
+	src="<c:url value="/scripts/interview.js"/>"></script>
+
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+.navbar-inverse .navbar-nav>li>a{
+	 color: #ffffff;
+</style>
+
+</head>
+<body onload="StartTimers(); document.forms[0].reset();" onmousemove="ResetTimers();">
+<div id="timeout">
+</div>
+	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+		</div>
+		
+		<div id="navbar" class="collapse navbar-collapse">
+
+			<div class="topnav" style="background-color: red">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
+				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right">
+				
+					<li><a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
+					<li><a href="reports"><span class="glyphicon glyphicon-equalizer"></span>Reports</a></li>
+					<li><a href="candidateinfo"><span class="glyphicon glyphicon-user" data-toggle="tooltip"></span> Candidates </a></li>
+					<li><a href="require"><span class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
+				
+					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+					
+					<li><a><span class="glyphicon glyphicon-user"></span> </a></li>
+					<li><a href="login"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+					<li><a><span></span></a></li>
+				</ul> 
+				</div>
+				</div>
+	</nav>
+	<div class="main-content">
+		<a href="listOfInterview"><button class="btn btn-default">BACK</button></a>
+		<div class="container">
+			<div class="row">
+				<form action="save2" method="post" data-toggle="validator"
+					role="form" onsubmit="return executeOnSubmit();">
+					<br> <br>
+					<div class="col-sm-12">
+						<h2 align="center">INTERVIEW INFORMATION</h2>
+						<br> <br>
+						<p>
+							<input type="hidden" name="id" value=""
+								readonly="true" />
+						</p>
+						<div class="row">
+							<div class="col-sm-3 form-group redbox">
+								<label class="required">CANDIDATE ID</label> <span
+									class="asterisk_input"> </span> <input type="text" 
+									class="form-control" name="canid" value=""
+									onkeypress="return isNumber(event)" onkeyup="if(this.textLength != 0) {clear.disabled = false} else {clear.disabled = true}" 
+									placeholder="" id="candidate" required />
+							</div>
+
+							<div class="col-sm-3 form-group redbox">
+								<label class="required">CANDIDATE NAME</label> <input
+									type="text" placeholder=""
+									name="firstName" value="" pattern=".*\S+.*"
+									class="form-control txtOnly" required>
+							</div>
+							<div class="col-sm-3 form-group bluebox">
+
+								<label class="required">CANDIDATE EMAIL-ID</label> <input
+									type="email" placeholder-""
+									onkeyup="loadEmail()" value="" id="email"
+									name="email" class="form-control" required> 
+							</div>
+						</div>
+
+						<div class="row">
+							<!-- <div class="col-sm-3 form-group redbox">
+
+								<label class="required">TRF ID</label> <input
+									type="text" placeholder="Enter trf id here.." name="id"
+									onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"
+									class="form-control" required>
+							</div> -->
+							
+							<!-- <div class="col-sm-3 form-group redbox">
+
+								<label class="required">INTERVIEWER NAME</label> <input
+									type="text" placeholder="Enter interviewer name here.."
+									name="interviewerName" class="form-control" required>
+							</div> -->
+<div class="col-sm-3 form-group redbox">
+
+							<label class="required">INTERVIEWER NAME</label> <input type="text" 
+								placeholder="" name="interviewerName"  pattern=".*\S+.*"
+								class="form-control my-field" required>
+						</div>
+
+							<div class="col-sm-3 form-group redbox">
+
+								<label class="required">INTERVIEWER E-MAIL ID</label> <input
+									type="text" name="interviewerEmail" id="jobOpening"
+									onkeyup="loadEmail()" onblur="validateEmail(this);"
+										placeholder="" class="form-control"
+									required />
+							</div>
+							<div class="col-sm-3 form-group redbox">
+
+								<label class="required">HR</label> <input type="text"
+									placeholder="" pattern=".*\S+.*"
+										name="hrName"
+									class="form-control txtOnly" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3 form-group bluebox">
+								<label class="required">POSITION NAME</label> <select
+									name="positionName" class="form-control" required>
+									<option value=""></option>
+									<option value="Trainee">Trainee</option>
+									<option value="Developer">Developer</option>
+									<option value="Software Developer">Software Developer</option>
+									<option value="Tester">Tester</option>
+									<option value="BIM-Services">BIM-Services</option>
+									<option value="Others">Others</option>
+									
+								</select>
+							</div>
+
+
+							<div class="col-sm-3 form-group redbox">
+								<label class="required" for="meeting">INTERVIEW DATE</label> <span
+									class="asterisk_input"> </span> <input id="meeting" type="text"
+									placeholder="" name="interviewDate"
+									class="form-control" required>
+							</div>
+
+							<div class="col-sm-3 form-group redbox">
+								<label class="required" for="meeting">INTERVIEW TYPE</label> <select
+									name="interviewType" class="form-control" name="interviewType"
+									required>
+									<option value=""></option>
+									<option value="TelePhonic">TelePhonic</option>
+									<option value="facetface">FaceFace</option>
+									<option value="Skype">Skype</option>
+								</select>
+							</div>
+						</div>
+						<!-- <div class="row">
+						<div class="col-sm-3 form-group redbox">
+							<label class="required">INTERVIEW TIME SLOT</label>	<input type="time" id="time" class="form-control" name="time">
+							</div>
+						</div> -->
+					</div>
+
+					<div class="col-sm-11 text-center">
+						<button type="submit" class="btn btn-default">SAVE</button>
+						<button class="btn btn-default" name="clear" onClick="return confirm('Are you absolutely sure you want to delete?')" type="reset" disabled="disabled">CLEAR</button>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+		<br>
+
+	</div>
+	<div class="footer">
+  <p>© 2018 SRINSOFT TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+</div>
+</body>
+<script>
+
+var EmailDomainSuggester = {
+		  
+		  domains: ["yahoo.com", "gmail.com", "google.com", "hotmail.com", "googlemail.com", "msn.com", "hotmail.co.uk", "yahoo.co.uk"],
+		  
+		  bindTo: $('#email'),
+		  
+		  init: function() {
+		    this.addElements();
+		    this.bindEvents();
+		  },
+		  
+		  addElements: function() {
+		    // Create empty datalist
+		    this.datalist = $("<datalist />", {
+		      id: 'email-options'
+		    }).insertAfter(this.bindTo);
+		    // Corelate to input
+		    this.bindTo.attr("list", "email-options");
+		  },
+		  
+		  bindEvents: function() {
+		    this.bindTo.on("keyup", this.testValue);
+		  },
+		    
+		  testValue: function(event) {
+		    var el = $(this),
+		        value = el.val();
+		                    
+		    // email has @
+		    // remove != -1 to open earlier
+		    if (value.indexOf("@") != -1) {
+		      value = value.split("@")[0];
+		      EmailDomainSuggester.addDatalist(value); 
+		    } else {
+		      // empty list
+		      EmailDomainSuggester.datalist.empty();
+		    }
+		     
+		  },
+		  
+		  addDatalist: function(value) {
+		    var i, newOptionsString = "";
+		    for (i = 0; i < this.domains.length; i++) {
+		      newOptionsString += 
+		        "<option value='" + 
+		          value + 
+		          "@" +
+		          this.domains[i] +
+		        "'>";
+		    }
+		    
+		    // add new ones
+		    this.datalist.html(newOptionsString);
+		  }
+		  
+		}
+
+		EmailDomainSuggester.init();
+$( function() {
+    //$( "#meeting" ).datepicker({ minDate: -20, maxDate: "+1M +10D" });
+	 $( "#meeting" ).datepicker({ minDate: 0, maxDate: "+1M +28D"});
+  } );
+  
+/* $('input').keypress(function( e ) {
+    if(e.which === 32) 
+        return false;
+}); */
+//Set timeout variables.
+var timoutWarning = 60000; // Display warning in 14 Mins.
+var timoutNow = 900000; // Timeout in 15 mins.
+var logoutUrl = 'login'; // URL to logout page.
+var warningTimer;
+var timeoutTimer;
+
+// Start timers.
+function StartTimers() {
+    warningTimer = setTimeout("IdleWarning()", timoutWarning);
+    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+}
+
+// Reset timers.
+function ResetTimers() {
+    clearTimeout(warningTimer);
+    clearTimeout(timeoutTimer);
+    StartTimers();
+    $("#timeout").dialog('close');
+}
+
+// Show idle timeout warning dialog.
+function IdleWarning() {
+    $("#timeout").dialog({
+        modal: true
+    });
+}
+
+$('.txtOnly').keypress(function (e) {
+	var regex = new RegExp("^[a-zA-Z]+$");
+	var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+	if (regex.test(str)) {
+		return true;
+	}
+	else
+	{
+	e.preventDefault();
+	$('.error').show();
+	$('.error').text('Please Enter Alphabate');
+	return false;
+	}
+});
+// Logout the user.
+function IdleTimeout() {
+    window.location = logoutUrl;
+}
+
+function executeOnSubmit()
+{
+        
+        var res = confirm("Your Interview has been Scheduled successfully!");
+
+        if(res)
+                return true;
+        else
+                return false;
+}
+</script>
+</html>
+
