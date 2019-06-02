@@ -1,5 +1,5 @@
 package com.talent.setting;
 
-public class Setting {
+public class Slatable {
 
 }

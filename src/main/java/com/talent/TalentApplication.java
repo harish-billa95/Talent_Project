@@ -1,4 +1,4 @@
-package com.talent.candidate;
+package com.talent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

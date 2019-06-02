@@ -18,61 +18,61 @@ public class MprForm {
 	@Column(name = "id")
 	public Integer id;
 
-	@Column(name = "departmentName")
-	private String departmentName;
-	@Column(name = "requestingManager")
-	private String requestingManager;
+	@Column(name = "department_name")
+	public String departmentName;
+	@Column(name = "requesting_manager")
+	public String requestingManager;
 	@Column(name = "position")
-	private String position;
+	public String position;
 	@Column(name = "gender")
-	private String gender;
-	@Column(name = "skillSet")
-	private String skillSet;
+	public String gender;
+	@Column(name = "skill_set")
+	public String skillSet;
 	@Column(name = "experience")
-	private String experience;
-	@Column(name = "visaType")
-	private String visaType;
-	@Column(name = "shiftTimings")
-	private String shiftTimings;
+	public String experience;
+	@Column(name = "visa_type")
+	public String visaType;
+	@Column(name = "shift_timings")
+	public String shiftTimings;
 	@Column(name = "supervisior")
-	private String supervisior;
-	@Column(name = "teamSize")
-	private String teamSize;
-	@Column(name = "completionDate")
-	private String completionDate;
-	@Column(name = "hireInfo")
-	private String hireInfo;
-	@Column(name = "mprDate")
-	private String mprDate;
+	public String supervisior;
+	@Column(name = "team_size")
+	public String teamSize;
+	@Column(name = "completion_date")
+	public String completionDate;
+	@Column(name = "hire_info")
+	public String hireInfo;
+	@Column(name = "mpr_date")
+	public String mprDate;
 	@Column(name = "responsibilties")
-	private String responsibilties;
-	@Column(name = "domainExpertise")
-	private String domainExpertise;
-	@Column(name = "functionHead")
-	private String functionHead;
-	@Column(name = "hrManager")
-	private String hrManager;
+	public String responsibilties;
+	@Column(name = "domain_expertise")
+	public String domainExpertise;
+	@Column(name = "function_head")
+	public String functionHead;
+	@Column(name = "hr_manager")
+	public String hrManager;
 	@Column(name = "approved")
-	private String approved;
+	public String approved;
 	@Column(name = "approvedby")
-	private String approvedby;
+	public String approvedby;
 	@Column(name = "status")
-	private String status;
-	@Column(name = "closingDate")
-	private String closingDate;
+	public String status;
+	@Column(name = "closing_date")
+	public String closingDate;
 	@Column(name = "recipient")
-	private String recipient;
-	@Column(name = "positionName")
-	private String positionName;
-	@Column(name = "budgetRange")
-	private String budgetRange;
-	@Column(name = "assignHr1")
-	private String assignHr1;
-	@Column(name = "assignHr2")
-	private String assignHr2;
-	@Column(name = "firstName")
-	private String firstName;
+	public String recipient;
+	@Column(name = "position_name")
+	public String positionName;
+	@Column(name = "budget_range")
+	public String budgetRange;
+	@Column(name = "assign_hr1")
+	public String assignHr1;
+	@Column(name = "assign_hr2")
+	public String assignHr2;
+	@Column(name = "first_name")
+	public String firstName;
 	@Column(name = "recipient1")
-	private String recipient1;
+	public String recipient1;
 
 }
