@@ -60,36 +60,8 @@ table.eventsTable tbody th, table.eventsTable tbody td {
 <body onload="StartTimers();" onmousemove="ResetTimers();">
 <div id="timeout">
 </div>
-	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-			</div>
-		</div>
-		<div id="navbar" class="collapse navbar-collapse">
-				<div class="topnav" style="background-color: red">
-				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
-				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right">
-					<li><a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
-					<li><a href="reports"><span class="glyphicon glyphicon-equalizer"></span>Reports</a></li>
-					<li><a href="candidateinfo"><span class="glyphicon glyphicon-user" data-toggle="tooltip"></span> Candidates </a></li>
-					<li><a href="require"><span class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
-					
-					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
-					
-					<li><a><span class="glyphicon glyphicon-user"></span> ${author} </a></li>
-					<li><a href="login"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
-					<li><a><span></span></a></li>
-				</ul> 
-				</div>
-				</div>
-	</nav>
+<div th:replace="fragment/sidenav.html::sidenav"></div>
+	
 	<div class="main-content">
 		<div class="container">
 			<a href="mprRequirements"><button class="btn btn-default">BACK</button></a>
@@ -174,65 +146,5 @@ table.eventsTable tbody th, table.eventsTable tbody td {
 	</div>
 	
 </body>
-<script>
 
-$(document).ready(function() {
-    $('#eventsTable').DataTable( {
-        dom: 'Bfrtip',
-        "scrollY":        "400px",
-        "scrollCollapse": true,
-        "scrollX": true,
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        buttons: [
-            'excelHtml5'
-        ],
-    "columnDefs": [ {
-        "targets": 'no-sort',
-        "orderable": false,
-        
-    }]
-    
-    } );
-    
-} );
-//Set timeout variables.
-var timoutWarning = 60000; // Display warning in 14 Mins.
-var timoutNow = 90000; // Timeout in 15 mins.
-var logoutUrl = 'login'; // URL to logout page.
-var warningTimer;
-var timeoutTimer;
-
-//Set timeout variables.
-var timoutWarning = 60000; // Display warning in 14 Mins.
-var timoutNow = 900000; // Timeout in 15 mins.
-var logoutUrl = 'login'; // URL to logout page.
-var warningTimer;
-var timeoutTimer;
-
-// Start timers.
-function StartTimers() {
-    warningTimer = setTimeout("IdleWarning()", timoutWarning);
-    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
-}
-
-// Reset timers.
-function ResetTimers() {
-    clearTimeout(warningTimer);
-    clearTimeout(timeoutTimer);
-    StartTimers();
-    $("#timeout").dialog('close');
-}
-
-// Show idle timeout warning dialog.
-function IdleWarning() {
-    $("#timeout").dialog({
-        modal: true
-    });
-}
-
-// Logout the user.
-function IdleTimeout() {
-    window.location = logoutUrl;
-}
-</script>
 </html>

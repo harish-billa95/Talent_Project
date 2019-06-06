@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
 <title>Talent Acquisition Portal</title>
 
@@ -25,93 +25,21 @@
 <body onload="StartTimers();" onmousemove="ResetTimers();">
 <div id="timeout">
 </div>
-	<nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="true"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-			</div>
-		</div>
-		
-		<div id="navbar" class="collapse navbar-collapse">
-			<div class="topnav" style="background-color: red">
-				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfnOIQ7p59rVkxtRmGjOHZu0dMbRmtXXMWrqLOiNWUb6XdFpsQ" width="100" height = "50" alt="Srinsoft"> 
-				<ul class="nav navbar-nav navbar-user navbar-log-out navbar-right">
-				
-					<li><a href="dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard </a></li>
-					<li><a href="reports"><span class="glyphicon glyphicon-equalizer"></span> Reports</a></li>
-					<li><a href="candidateinfo"><span class="glyphicon glyphicon-user" data-toggle="tooltip"></span> Candidates </a></li>
-					<li><a href="require"><span class="glyphicon glyphicon-list-alt"></span> Recruit </a></li>
-					
-					<li><a href="userroles"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
-					
-					<li><a><span class="glyphicon glyphicon-user"></span>  </a></li>
-					<li><a href="login"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
-					<li><a><span></span></a></li>
-				</ul> 
-				</div>
-				</div>
-	</nav>
-			<!-- <ul class="nav navbar-center">
-				<div class="position">
-					<font size="6" color="white">Recruitment</font>
-				</div>
-			</ul> -->
-		
-	<!-- <nav class="navbar-primary sidenav collapsed">
-		<ul class="navbar-primary-menu" data-toggle="tooltip"
-			data-placement="right" title="Recruit">
-			<br>
-			<br>
-			<li><a href="require"><span
-					class="glyphicon glyphicon-list-alt" data-toggle="tooltip"
-					title="Recruit"></span><span class="nav-label">Recruit</span></a></li>
-		</ul>
-		<ul class="navbar-primary-menu" data-toggle="tooltip"
-			data-placement="right" title=" candidates">
-			<li><a href="candidateinfo"><span
-					class="glyphicon glyphicon-user" data-toggle="tooltip"
-					title=" candidates"></span><span class="nav-label">candidates</span></a></li>
-		</ul>
-		<ul class="navbar-primary-menu" data-toggle="tooltip"
-			data-placement="right" title=" Mpr Requirements">
-			<li><a href="mprRequirements"><span
-					class="	glyphicon glyphicon-modal-window" data-toggle="tooltip"
-					title="Mpr Requirements"></span><span class="nav-label">Mpr Requirements</span></a></li>
-		</ul>
-	</nav> -->
+
+
+<div th:replace="fragment/sidenav.html::sidenav"></div>
+
+			
 	<br>
 	<br>
 	<br>
 
 
-	<!-- <%-- <div class="main-content">
-		<div class="content">
-				<br> <br> <br>
-				<ul class="tiles">
-					<div class="col-sm-6">
-						<li class="tile tile-big tile-1" data-page-type="r-page"
-							data-page-name="random-r-page">
-							<div class="card">
-								<h2 class="card-title">
-									<a href="createMPR">CREATE MPR</a>
-									</h2>
 
-									<!-- <ul class="list-group list-group-flush">
-									<li class="list-group-item">ARCHANA</li>
-							<!-- <!--  -->
 					<h2 align="center">TALENT REQUISITION FORM PROCESSING</h2>
 		
-
-	
-
 	<section id="team" class="pb-5">
-			
+		<div class="row">
 		<div class="container">
 			<div class="row">
 				<!-- Team member -->
@@ -129,7 +57,7 @@
 										<h4 class="card-title">
 											<a href="createMPR">TALENT REQUISITION <br>FORM</a>
 										</h4>
-										<a href="createMPR" class="btn btn-primary btn-sm"><i
+										<a th:href="@{/talent/mprForm}" class="btn btn-primary btn-sm"><i
 											class="glyphicon glyphicon-plus"></i></a>
 									</div>
 								</div>
@@ -141,7 +69,7 @@
 			
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<div class="image-flip"
-						ontouchstart="this.classList.toggle('hover');">
+						ontouchstart="1`'hover');">
 						<div class="mainflip">
 							<div class="frontside">
 								<div class="card">
@@ -160,9 +88,8 @@
 						</div>
 					</div>
 				</div>
-				</security:authorize>
-				<!-- ./Team member -->
-				<!-- Team member -->
+				
+			
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<div class="image-flip"
 						ontouchstart="this.classList.toggle('hover');">
@@ -174,7 +101,7 @@
 										<p>
 											<img src="">
 										</p>
-										<h4 class="card-title"><a href="listoftest">OVERALL TRF <br>STATUS</a></h4>
+										<h4 class="card-title"><a th:href="@{/talent/trfStatus}">OVERALL TRF <br>STATUS</a></h4>
 				
 									</div>
 								</div>
@@ -182,11 +109,13 @@
 						</div>
 					</div>
 				</div>
-				<!-- ./Team member -->
-				<!-- Team member -->
-							
-				<!-- ./Team member -->
-				<!-- Team member -->
+				
+				
+				
+				
+				
+			
+			
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<div class="image-flip"
 						ontouchstart="this.classList.toggle('hover');">
@@ -200,7 +129,7 @@
 												src="">
 										</p>
 										<h4 class="card-title"><a href="sub1"> OVERALL CANDIDATE <br>STATUS</a></h4>
-									<!-- 	<%-- <h5></h5> --%> -->
+										
 					
 									</div>
 								</div>
@@ -208,11 +137,12 @@
 						</div>
 					</div>
 				</div>
+		
 				<!-- ./Team member -->
-				<!-- Team member -->
-				<!-- ./Team member -->
+		
 
 			</div>
+		</div>
 		</div>
 	</section>
 	<div class="footer">
