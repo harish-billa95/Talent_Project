@@ -29,4 +29,41 @@ public class Candidate {
 
 	@Column(name = "file_path")
 	private String filePath;
+	@Column(name = "mobile")
+	private String mobile;
+
+	@Column(name = "hr")
+	private String hrName;
+
+	@Column(name = "email")
+	private String email;
+	@Column(name = "street")
+	private String street;
+
+	@Column(name = "previousCompany")
+	private String previousCompany;
+
+	@Column(name = "currentJobTitle")
+	private String currentJobTitle;
+
+	@Column(name = "experience")
+	private String experience;
+
+	@Column(name = "highestQualification")
+	private String highestQualification;
+
+	@Column(name = "specialization")
+	private String specialization;
+
+	@Column(name = "candidateStatus")
+	private String candidateStatus;
+
+	@Column(name = "source")
+	private String source;
+	@Column(name = "overallResult")
+	private String overallResult;
+	
+	@Column(name = "candidate_availability")
+	private String candidateAvailability;
+	
 }

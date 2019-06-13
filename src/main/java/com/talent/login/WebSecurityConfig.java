@@ -1,0 +1,67 @@
+package com.talent.login;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+ 
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+ 
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+ 
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
+    }
+     
+     
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { 
+ 
+        // Setting Service to find User in the database.
+        // And Setting PassswordEncoder
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());     
+ 
+    }
+ 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+ 
+        http.csrf().disable();
+ 
+        // The pages does not require login
+        http.authorizeRequests().antMatchers("/", "talent/login/talent", "/logout").permitAll();
+ 
+        http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_SUPERADMIN')");
+  
+        http.authorizeRequests().antMatchers("/talent/**").access("hasRole('ROLE_SUPERADMIN')");
+        
+
+        
+        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
+ 
+        http.authorizeRequests().and().formLogin()//
+            
+                .loginProcessingUrl("/j_spring_security_check") // Submit URL
+                .loginPage("/login")//
+                .defaultSuccessUrl("/talent/dashboard")
+               
+                //.successForwardUrl("/dashboard/hr")//
+                .failureUrl("/login?error=true")//
+                .usernameParameter("username")//
+                .passwordParameter("password")
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/talent/login");
+    }
+  
+
+}
