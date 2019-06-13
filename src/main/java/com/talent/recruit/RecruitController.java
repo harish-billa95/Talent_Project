@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/talent")
 public class RecruitController {
-@Autowired
-MprFormRepository formrepo;
+	/*
+	 * @Autowired MprFormRepository formrepo;
+	 */
 
 @GetMapping(value="/recuritment")
 public String Recurit(Model model) {

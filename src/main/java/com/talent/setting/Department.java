@@ -9,27 +9,26 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-@Entity
+/*@Entity
 @Table(name="department_dao")
-@Data
+@Data*/
 public class Department {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="departmentId")
-	private Integer id;
-	
-	@Column(name="departmentName")
-	private String departmentName;
-	
-	@Column(name="mprApprover")
-	private String mprApprover;
-	
-	@Column(name="team")
-	private String team;
-	
-	@Column(name="cc")
-	private String cc;	
+	/*
+	 * @Id
+	 * 
+	 * @GeneratedValue(strategy=GenerationType.IDENTITY)
+	 * 
+	 * @Column(name="departmentId") private Integer id;
+	 * 
+	 * @Column(name="departmentName") private String departmentName;
+	 * 
+	 * @Column(name="mprApprover") private String mprApprover;
+	 * 
+	 * @Column(name="team") private String team;
+	 * 
+	 * @Column(name="cc") private String cc;
+	 */
 	
 	
 }

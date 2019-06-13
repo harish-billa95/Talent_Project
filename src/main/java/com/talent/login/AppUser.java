@@ -23,7 +23,7 @@ import javax.persistence.Table;
 	private String encrytedPassword;
 	
 	@Column(name = "ENABLED")
-	private byte enabled;
+	private String enabled;
 
 	public AppUser() {
 
@@ -59,11 +59,11 @@ import javax.persistence.Table;
 	this.encrytedPassword = encrytedPassword;
 	}
 
-	public byte getEnabled() {
+	public String getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(byte enabled) {
+	public void setEnabled(String enabled) {
 		this.enabled = enabled;
 	}
 
