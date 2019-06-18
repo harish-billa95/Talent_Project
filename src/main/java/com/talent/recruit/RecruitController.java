@@ -55,8 +55,8 @@ public String addCandidate(Model model) {
 
 
 @GetMapping(value="/trfStatus")
-public String trfStatus(Model model) {
-	
+public String trfStatus(@ModelAttribute MprForm mprform,Model model) {
+	model.addAttribute("mprObj",formrepo.findAll());
 	return "MPRstatus";
 }
 
