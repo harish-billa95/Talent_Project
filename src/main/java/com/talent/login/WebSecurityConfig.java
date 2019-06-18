@@ -42,9 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // The pages does not require login
         http.authorizeRequests().antMatchers("/", "talent/login/talent", "/logout").permitAll();
  
-        http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_SUPERADMIN')");
+        http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_TECHNICALMANAGER')");
   
-        http.authorizeRequests().antMatchers("/talent/**").access("hasRole('ROLE_SUPERADMIN')");
+        http.authorizeRequests().antMatchers("/talent/**").access("hasRole('ROLE_TECHNICALMANAGER')");
         
 
         
@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             
                 .loginProcessingUrl("/j_spring_security_check") // Submit URL
                 .loginPage("/login")//
-                .defaultSuccessUrl("/talent/dashboard")
+                .defaultSuccessUrl("/talent/recuritment")
                
                 //.successForwardUrl("/dashboard/hr")//
                 .failureUrl("/login?error=true")//

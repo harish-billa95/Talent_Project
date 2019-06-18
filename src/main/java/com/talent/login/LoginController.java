@@ -2,14 +2,14 @@ package com.talent.login;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller
+ @Controller
  @RequestMapping("/talent")
 public class LoginController {
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@GetMapping("/login")
 	public String loginForm() {
 		return "login";
 	}
