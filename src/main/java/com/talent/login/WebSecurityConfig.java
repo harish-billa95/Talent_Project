@@ -40,13 +40,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
  
         // The pages does not require login
-        http.authorizeRequests().antMatchers("/", "talent/login/talent", "/logout").permitAll();
- 
-        http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_TECHNICALMANAGER')");
-  
-        http.authorizeRequests().antMatchers("/talent/**").access("hasRole('ROLE_TECHNICALMANAGER')");
+		/*
+		 * http.authorizeRequests().antMatchers("/", "talent/login/talent",
+		 * "/logout").permitAll();
+		 * 
+		 * http.authorizeRequests().antMatchers("/userInfo").access(
+		 * "hasAnyRole('ROLE_TECHNICALMANAGER')");
+		 * 
+		 * http.authorizeRequests().antMatchers("/talent/**").access(
+		 * "hasRole('ROLE_TECHNICALMANAGER')");
+		 */
         
-
+        http.authorizeRequests()
+        
+        .antMatchers("/", "talent/login/talent", "/logout").permitAll()
+ 
+        .antMatchers("/admin/**").access("hasRole('ROLE_SUPERADMIN')")
+        
+        .antMatchers("/user/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_ADMIN')");
         
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
  
