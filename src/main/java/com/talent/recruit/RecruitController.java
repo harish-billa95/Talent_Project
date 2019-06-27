@@ -1,6 +1,8 @@
 package com.talent.recruit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticatedPrincipal;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,18 +31,18 @@ public String Recurit(Model model ) {
 }
 
 @GetMapping(value="/mprForm")
-public String mprForm(@ModelAttribute MprForm mprform,Model model) {
-	model.addAttribute("userObj",apprepo.findAll());
+public String mprForm(@ModelAttribute MprForm mprform,Model model,Authentication auth) {
+	model.addAttribute("appObj",apprepo.findByUserName(auth.getName()));
 	model.addAttribute("mprObj",formrepo.findAll());
 	return "CreateMpr";
 }
 
 
 @PostMapping(value="/mprformPost")
-public String mprPost(@RequestParam  Integer mprId ,@ModelAttribute MprForm mprform,AppUser appuser) {
-	appuser.setUserName("ArchanaSivaraj");
+public String mprPost(@RequestParam  Integer mprId ,@ModelAttribute MprForm mprform,AppUser appuser,AuthenticatedPrincipal auth) {
+	appuser.setUserName(auth.getName());
 	MprForm obj = formrepo.findByMprId(mprId);
-	obj.setRequestingManager(mprform.get(appuser));
+	obj.setRequestingManager(appuser.getUserName());
 	formrepo.save(obj);
 	return "redirect:/talent/mprForm";
 

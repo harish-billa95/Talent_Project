@@ -25,6 +25,11 @@ import javax.persistence.Table;
 	@Column(name = "ENABLED")
 	private String enabled;
 
+	/*
+	 * @OneToMany(mappedBy = "APP_USER", cascade = { CascadeType.PERSIST,
+	 * CascadeType.MERGE }) public Set<MprForm> mprform;
+	 */
+	
 	public AppUser() {
 
 	}

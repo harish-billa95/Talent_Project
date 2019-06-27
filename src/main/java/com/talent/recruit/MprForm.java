@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.talent.login.AppUser;
-
 import lombok.Data;
 
 @Entity
@@ -106,9 +104,6 @@ public class MprForm {
 	@Column(name = "recipient1")
 	public String recipient1;
 
-	public String get(AppUser appuser) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
