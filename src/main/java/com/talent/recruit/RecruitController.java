@@ -6,17 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.AuthenticatedPrincipal;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.talent.login.AppUser;
 import com.talent.login.AppUserRepository;
 @Controller
 @RequestMapping("/talent")
@@ -34,6 +30,14 @@ public String Recurit(Model model ) {
 	
 	return "recuritmentHome";
 }
+
+@GetMapping(value="/viewMpr")
+public String getViewMpr(Model model ) {
+	
+	
+	return "ViewMPR";
+}
+
 
 @GetMapping(value="/mprForm")
 public String mprForm(@ModelAttribute MprForm mprform,Model model,Principal principal) {

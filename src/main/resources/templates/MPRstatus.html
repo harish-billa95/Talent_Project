@@ -1,5 +1,5 @@
-
-<html>
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
 <title>MPR Status</title>
 
 <head>
@@ -96,28 +96,29 @@ table.eventsTable tbody th, table.eventsTable tbody td {
 						</tr>
 					</thead>
 					<tbody>
-	 					<c:forEach items="${mprforms}" var="mprForm">
-							<tr>
-							<td><c:out value="${mprForm.id}" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
+	 				
+							<tr th:each="mpr : ${mprObj}">
+						
+								<td th:text="${mpr.mprId}"></td>
+								<td th:text="${mpr.positionName}"></td>
+								<td th:text="${mpr.departmentName}"></td>
+								<td th:text="${mpr.requestingManager}"></td>
+								<td th:text="${mpr.position}"></td>
+								<td th:text="${mpr.skillSet}"></td>
+								<td th:text="${mpr.experience}"></td>
+								<!-- <td th:text="${#dates.format(mpr.mprDate, 'dd-MM-yyyy')}"></td> -->
+								<td th:text="${mpr.mprDate}"></td>
+								<td ></td>
+								<td ></td>
 								<td>
-								<a href=""><button
+								<button th:href="@{/talent/ViewMpr}"
 								style="font-size: 15px" value="send">
-									<i class="glyphicon glyphicon-triangle-right"></i></button></a><br>
-									<c:out value=""/>
+									<i class="glyphicon glyphicon-triangle-right"></i></button><br>
+									
 									
 								</td>
 								
-								<td><a href="">
+								<td><th: href="">
 								<button style="font-size: 15px" value="send" class="glyphicon glyphicon-share" ${(empty mprForm.approved) ? 'disabled' : ''}>
 										</button>
 										</a><br><c:out value="" /><br>
@@ -126,6 +127,8 @@ table.eventsTable tbody th, table.eventsTable tbody td {
 								
 								<td><c:out value="" /><br>
 									<c:out value="" /></td>
+									
+									<td></td>
 							</security:authorize>
 							</tr>
 						</c:forEach>
