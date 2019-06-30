@@ -1,5 +1,10 @@
 package com.talent.recruit;
 
+import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.Authentication;
@@ -18,7 +23,7 @@ import com.talent.login.AppUserRepository;
 public class RecruitController {
 	
 	  @Autowired 
-	  MprFormRepository formrepo;
+	  MprFormRepository mprepo;
 	 
 	  @Autowired
 	  AppUserRepository apprepo;
@@ -31,19 +36,38 @@ public String Recurit(Model model ) {
 }
 
 @GetMapping(value="/mprForm")
-public String mprForm(@ModelAttribute MprForm mprform,Model model,Authentication auth) {
-	model.addAttribute("appObj",apprepo.findByUserName(auth.getName()));
-	model.addAttribute("mprObj",formrepo.findAll());
+public String mprForm(@ModelAttribute MprForm mprform,Model model,Principal principal) {
+	String userName = principal.getName();
+	DateFormat df = new SimpleDateFormat("dd/MM/YYYY");
+	String formattedDate = df.format(new Date());
+	model.addAttribute("dateObj", formattedDate);
+	model.addAttribute("addObj",userName);
+	model.addAttribute("mprObj",mprepo.findAll());
 	return "CreateMpr";
 }
 
 
 @PostMapping(value="/mprformPost")
-public String mprPost(@RequestParam  Integer mprId ,@ModelAttribute MprForm mprform,AppUser appuser,AuthenticatedPrincipal auth) {
-	appuser.setUserName(auth.getName());
-	MprForm obj = formrepo.findByMprId(mprId);
-	obj.setRequestingManager(appuser.getUserName());
-	formrepo.save(obj);
+public String mprPost(@ModelAttribute MprForm mprform,Principal principal) {
+	MprForm obj = new MprForm();
+	String userName = principal.getName();
+	obj.setRequestingManager(userName);
+	obj.setDepartmentName(mprform.getDepartmentName());
+	obj.setPosition(mprform.getPosition());
+	obj.setGender(mprform.getGender());
+	obj.setPositionName(mprform.getPositionName());
+	obj.setExperience(mprform.getExperience());
+	obj.setShiftTimings(mprform.getShiftTimings());
+	obj.setHireInfo(mprform.getHireInfo());
+	obj.setTeamSize(mprform.getTeamSize());
+	obj.setMprDate(mprform.getMprDate());
+	obj.setSupervisior(mprform.getSupervisior());
+	obj.setClosingDate(mprform.getClosingDate());
+	obj.setResponsibilties(mprform.getResponsibilties());
+	obj.setSkillSet(mprform.getSkillSet());
+	obj.setDomainExpertise(mprform.getDomainExpertise());
+	obj.setVisaType(mprform.getVisaType());
+	mprepo.save(obj);
 	return "redirect:/talent/mprForm";
 
 }
@@ -58,7 +82,7 @@ public String addCandidate(Model model) {
 
 @GetMapping(value="/trfStatus")
 public String trfStatus(@ModelAttribute MprForm mprform,Model model) {
-	model.addAttribute("mprObj",formrepo.findAll());
+	model.addAttribute("mprObj",mprepo.findAll());
 	return "MPRstatus";
 }
 

@@ -28,6 +28,7 @@ public class MprForm {
 
 	@Column(name = "position")
 	public String position;
+	
 
 	@Column(name = "gender")
 	public String gender;

@@ -16,9 +16,6 @@
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
 <!-- <script type="text/javascript"
 	src="<c:url value="/resources/scripts/createMPR.js"/>"></script> -->
 <style>
@@ -59,8 +56,8 @@
 		<div class="required">- Mandatory</div>
 			</div> -->
 			<div id="home" class="tab-pane fade in active">
-				<form action="saveMPRForm" method="post" data-toggle="validator"
-					role="form" onsubmit="return executeOnSubmit();">
+						<form th:action="@{/talent/mprformPost}" th:object="${mprObj}"
+					method="POST">
 					<!-- <%-- <center> -->
 					<!-- <h2 align="center">
 						ManPower Requisition Form
@@ -70,22 +67,20 @@
 					<!-- <div class="required">- Mandatory</div> -->
 					<br>
 					<div class="row">
-					
+
 						<div class="col-sm-11">
 							<div class="row">
-							
+
 								<div class="col-sm-3 form-group ">
-									<label class="required">REQUESTOR</label> <input type="text"
-										name="requestingManager"th:field="*{appObj}" th:name="userName"value="" pattern="[a-zA-Z0-9\s]+"
-										class="form-control" placeholder=""
-										readonly>
+								<label class="required">Requestor</label>
+							<span class="form-control" th:text="${addObj}"th:name="requestingManager"></span>
 								</div>
+								
 								<div class="col-sm-3 form-group ">
 									<label class="required">DEPARTMENT NAME</label> 
-									<select name="departmentName" class="form-control" onChange="myFunction()" required>
+									<select th:name="departmentName" class="form-control" onChange="myFunction()" required>
 										<option value="">Select a type</option>
-									
-											<option name="DEPARTMENT NAME" value="Java">Java</option>
+										<option name="DEPARTMENT NAME" value="Java">Java</option>
 										<option name="DEPARTMENT NAME" value="Php">Php</option>
 										<option name="DEPARTMENT NAME" value="Webmethods">Webmethods</option>
 										
@@ -101,7 +96,7 @@
 								</div>
 								<div class="col-sm-3 form-group ">
 										<label class="required">GENDER</label> <select
-										class="form-control" name="gender" required>
+										class="form-control" th:name="gender" required>
 										<option value=""></option>
 										<option name="gender" value="Male">Male</option>
 										<option name="gender" value="Female">Female</option>
@@ -114,14 +109,14 @@
 							<div class="row">
 								<div class="col-sm-3 form-group  ">
 									<label class="required">POSITION NAME</label> <input
-										type="text"   name="positionName" 
+										type="text"   th:name="positionName" 
 										placeholder="" 
 										 pattern=".*\S+.*" class="form-control"  required>
 								</div>
 
 								<div class="col-sm-3 form-group ">
 									<label class="required">EXPERIENCE</label> <select
-										class="form-control" name="experience" required>
+										class="form-control" th:name="experience" required>
 										<option value=""></option>
 									<option name="Experience" >0-1</option>
 										<option name="Experience">1-2</option>
@@ -131,7 +126,7 @@
 								
 								<div class="col-sm-3 form-group ">
 									<label class="required">SHIFT TIMINGS</label> <select
-										class="form-control" name="shiftTimings" required>
+										class="form-control" th:name="shiftTimings" required>
 										<option value=""></option>
 										<option name="shiftTimings" value="general">General</option>
 										<option name="shiftTimings" value="rotational">Rotational</option>
@@ -145,7 +140,7 @@
 								</div> -->
 								<div class="col-sm-3 form-group ">
 									<label class="required">HIRE TYPE</label> <select
-										class="form-control" name="hireInfo" required>
+										class="form-control" th:name="hireInfo" required>
 										<option value=""></option>
 										<option name="hireInfo" value="new">New</option>
 										<option name="hireInfo" value="replacement">Replacement</option>
@@ -155,7 +150,7 @@
 							<div class="row">
 								<div class="col-sm-3 form-group">
 									<label class="required">CURRENT TEAM SIZE </label> <input
-										type="text" name="teamSize" placeholder=""
+										type="text" th:name="teamSize" placeholder=""
 										onkeypress="return isNumber(event)"
 										class="form-control" required>
 								</div>
@@ -164,19 +159,24 @@
 										type="text" name="completionDate" placeholder="dd/mm/yyyy"
 										class="form-control" required>
 								</div>  -->
-								<div class="col-sm-3 form-group bluebox">
+							<!-- 	<div class="col-sm-3 form-group bluebox">
 									<label class="required">TRF RECEIVED DATE</label> <input
-										type="text" id="demo" name="mprDate" value=""
+										type="text" id="date" th:name="mprDate" value=""
 										class="form-control" readonly>
+								</div> -->
+									<div class="col-sm-3 form-group ">
+								<label class="required">TRF RECEIVED DATE</label>
+							<span class="form-control" th:text="${dateObj}"th:name="mprDate"></span>
 								</div>
+								
 								<div class="col-sm-3 form-group">
 									<label class="required">SUPERVISOR </label> <input type="text"
-										name="supervisior" placeholder="" pattern=".*\S+.*"
+										th:name="supervisior" placeholder="" pattern=".*\S+.*"
 										class="form-control my-field" required>
 								</div>
 								<div class="col-sm-3 form-group redbox">
 									<label class="required">EXPECTED CLOSE DATE</label> <input
-										type="text" name="closingDate"
+										type="text" th:name="closingDate"
 										class="form-control datavalue" value="" required readonly>
 								</div>
 							</div>
@@ -186,13 +186,13 @@
 									<label class="required"> <b>KEY RESPONSIBILITIES
 											AREA/JOB DESCRIPTION</b></label>
 									<textarea placeholder="" pattern=".*\S+.*"
-										name="responsibilties" rows="3" class="form-control  my-field" required></textarea>
+										th:name="responsibilties" rows="3" class="form-control  my-field" required></textarea>
 								</div>
 
 								<div class="col-sm-12 form-group">
 									<label class="required">SKILL SET </label>
 									<textarea placeholder="" rows="3" pattern=".*\S+.*"
-										name="skillSet" class="form-control my-field" required></textarea>
+										th:name="skillSet" class="form-control my-field" required></textarea>
 								</div>
 							</div>
 
@@ -200,7 +200,7 @@
 								<div class="col-sm-3 form-group redbox">
 									<label class=""> DOMAIN EXPERTISE </label> <input type="text" pattern=".*\S+.*"
 										placeholder=""
-										name="domainExpertise" class="form-control txtOnly">
+										th:name="domainExpertise" class="form-control txtOnly">
 								</div>
 								<!-- <div class="col-sm-3 form-group bluebox">
 									<label class="">OTHER SKILL SET </label> <input type="text"
@@ -209,7 +209,7 @@
 								</div> -->
 								<div class="col-sm-3 form-group bluebox">
 									<label>VISA TYPE(H1B,B1) </label> <select class="form-control"
-										name="visaType">
+										th:name="visaType">
 										<option>--Select--</option>
 										<option name="visaType" value="NA">NA</option>
 										<option name="visaType" value="H1B">H1B</option>
@@ -224,6 +224,7 @@
 								<button class="btn btn-default" name="clear" onClick="return confirm('Are you absolutely sure you want to delete?')" type="reset" disabled="disabled">Clear</button>
 							</div>
 						</div>
+					
 					</div>
 				</form>
 			</div>
@@ -477,5 +478,7 @@
 
 		$('.my-field').bind('keypress', testInput);
 </script>
+
+
 </html>
 
