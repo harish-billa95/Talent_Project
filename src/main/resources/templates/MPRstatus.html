@@ -69,7 +69,7 @@ table.eventsTable tbody th, table.eventsTable tbody td {
 				<table id="eventsTable" class="table table-bordered" >
 					<thead>
 						<tr>
-						<th data-field="id">TRF ID</th>
+						<th class="no-sort" data-field="mprId">TRF ID</th>
 							<th class="no-sort" data-field="positionName">POSITION NAME</th>
 							<th class="no-sort" data-field="departmentName">DEPARTMENT</th>
 							<th  class="no-sort" data-field="requestingManager">REQUESTOR</th>
@@ -106,10 +106,11 @@ table.eventsTable tbody th, table.eventsTable tbody td {
 								<td th:text="${mpr.position}"></td>
 								<td th:text="${mpr.skillSet}"></td>
 								<td th:text="${mpr.experience}"></td>
-								<!-- <td th:text="${#dates.format(mpr.mprDate, 'dd-MM-yyyy')}"></td> -->
 								<td th:text="${mpr.mprDate}"></td>
-								<td ></td>
-								<td ></td>
+								<!-- <td th:text="${#dates.format(mpr.mprDate, 'dd-MM-yyyy')}"></td> -->
+							
+								<td th:text="${mpr.closingDate}"></td>
+								<td></td>
 								<td>
 								<button th:href="@{/talent/ViewMpr}"
 								style="font-size: 15px" value="send">
