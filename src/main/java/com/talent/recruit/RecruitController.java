@@ -44,7 +44,7 @@ public String mprForm(@ModelAttribute MprForm mprform,Model model,Principal prin
 	String userName = principal.getName();
 	DateFormat df = new SimpleDateFormat("dd/MM/YYYY");
 	String formattedDate = df.format(new Date());
-	model.addAttribute("dateObj", formattedDate);
+	model.addAttribute("mprDate", formattedDate);
 	model.addAttribute("addObj",userName);
 	model.addAttribute("mprObj",mprepo.findAll());
 	return "CreateMpr";
@@ -55,6 +55,8 @@ public String mprForm(@ModelAttribute MprForm mprform,Model model,Principal prin
 public String mprPost(@ModelAttribute MprForm mprform,Principal principal) {
 	MprForm obj = new MprForm();
 	String userName = principal.getName();
+	DateFormat df = new SimpleDateFormat("dd/MM/YYYY");
+	String formattedDate = df.format(new Date());
 	obj.setRequestingManager(userName);
 	obj.setDepartmentName(mprform.getDepartmentName());
 	obj.setPosition(mprform.getPosition());
@@ -64,7 +66,7 @@ public String mprPost(@ModelAttribute MprForm mprform,Principal principal) {
 	obj.setShiftTimings(mprform.getShiftTimings());
 	obj.setHireInfo(mprform.getHireInfo());
 	obj.setTeamSize(mprform.getTeamSize());
-	obj.setMprDate(mprform.getMprDate());
+	obj.setMprDate(formattedDate);
 	obj.setSupervisior(mprform.getSupervisior());
 	obj.setClosingDate(mprform.getClosingDate());
 	obj.setResponsibilties(mprform.getResponsibilties());
